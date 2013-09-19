@@ -33,4 +33,9 @@ Tomatostats::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  config.after_initialize do
+    t = Time.local(2013, 9, 19, 12, 40)
+    Timecop.travel t
+  end
 end
