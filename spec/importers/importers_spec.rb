@@ -10,7 +10,7 @@ shared_examples "an importer" do
     end
 
     describe ".response" do
-      subject importer.import(file, user).response
+      subject { importer.import(file, user).response }
 
       it "returns success" do
         expect(subject.success?).to be_true
@@ -27,7 +27,7 @@ shared_examples "an importer" do
     let(:file) { "#{Rails.root}/spec/support/invalid_file" }
 
     describe ".response" do
-      subject importer.import(file, user).response
+      subject { importer.import(file, user).response }
 
       it "returns no success" do
         expect(subject.success?).to be_false
