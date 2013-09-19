@@ -26,3 +26,5 @@ group :development do
   gem 'guard'
   gem 'guard-bundler'
 end
+
+gem 'time_diff'
