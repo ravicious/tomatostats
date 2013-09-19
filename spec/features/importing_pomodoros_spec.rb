@@ -11,7 +11,7 @@ feature "Importing Pomodoros" do
     scenario "Importing pomodoros from an export file" do
       click_link "Import pomodoros"
 
-      attach_file "File", "#{Rails.root}/spec/support/clockwork_tomato.csv"
+      attach_file "File", "#{Rails.root}/spec/support/clockwork_tomato_old.csv"
       select "Clockwork Tomato", from: "Application"
       click_button "Submit"
 
@@ -20,8 +20,8 @@ feature "Importing Pomodoros" do
     end
 
     scenario "Importing new pomodoros" do
+      import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato_old.csv")
       import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
-      import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato_new.csv")
 
       expect(page).to have_css(".pomodoros li", count: 5)
     end

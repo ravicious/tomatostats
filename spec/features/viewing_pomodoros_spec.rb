@@ -3,7 +3,7 @@ require "spec_helper"
 feature "Viewing Pomodoros" do
   background do
     sign_in
-    import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato_new.csv")
+    import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
   end
 
   scenario "Viewing pomodoros" do
