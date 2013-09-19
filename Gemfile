@@ -10,3 +10,18 @@ gem 'therubyracer', platforms: :ruby # See https://github.com/sstephenson/execjs
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+
+group :development, :test do
+  gem "rspec-rails", "~> 2.14.0"
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'pry'
+end
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+  gem 'guard'
+  gem 'guard-bundler'
+end
