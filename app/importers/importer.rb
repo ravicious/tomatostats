@@ -3,17 +3,19 @@ require 'singleton'
 class Importer
   include Singleton
 
-  attr_writer :response
-
   Response = Struct.new(:success?, :pomodoros_added_count)
-  @empty_response = Response.new(false, 0)
+  FAIL_RESPONSE = Response.new(false, 0)
 
   def importers
-    @importers ||= Hash.new(EmptyImporter)
+    @@importers ||= Hash.new(EmptyImporter)
   end
 
   def response
-    @response || @empty_response
+    @@response || FAIL_RESPONSE
+  end
+
+  def response=(res)
+    @@response = res
   end
 
   def import(input, user)
