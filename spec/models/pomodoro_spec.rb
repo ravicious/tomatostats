@@ -6,7 +6,7 @@ describe Pomodoro do
   describe "duration" do
     let(:invalid_pomodoro) { build(:pomodoro, :too_long_duration) }
 
-    it "can't be longer than 4 hours" do
+    it "can't be longer than 1 hour" do
       expect(invalid_pomodoro).not_to be_valid
     end
   end
