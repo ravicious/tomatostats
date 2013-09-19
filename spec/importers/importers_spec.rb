@@ -2,7 +2,7 @@ require "spec_helper"
 
 shared_examples "an importer" do
   let(:user) { create(:user) }
-  let(:importer) { described_class }
+  let(:importer) { described_class.instance }
 
   context "given a standard file" do
     it "assigns pomodoros to a user" do
