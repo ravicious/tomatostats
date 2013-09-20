@@ -1,32 +1,20 @@
 class Importer
 
-  Response = Struct.new(:success?, :pomodoros_added_count)
-  FAIL_RESPONSE = Response.new(false, 0)
+  attr_reader :imported_pomodoros
 
-  def initialize(input, user)
-    @input = input
-    @user = user
-    @response = nil
+  def initialize(args = {})
+    @input = args[:input]
+    @user = args[:user]
+    @imported_pomodoros = 0
   end
 
   def importers
     @@importers ||= Hash.new(EmptyImporter)
   end
 
-  def response
-    @response || FAIL_RESPONSE
-  end
-
   def import
-    begin
-      count_imported_pomodoros do
-        custom_import
-      end
-      set_success_response
-    rescue
-      set_fail_response
-    ensure
-      self
+    count_imported_pomodoros do
+      custom_import
     end
   end
 
@@ -39,14 +27,7 @@ class Importer
   def count_imported_pomodoros(&block)
     pomodoros_before = @user.pomodoros.count
     yield
-    @pomodoros_count = @user.pomodoros.count - pomodoros_before
+    @imported_pomodoros = @user.pomodoros.count - pomodoros_before
   end
 
-  def set_success_response
-    @response = Response.new(true, @pomodoros_count)
-  end
-
-  def set_fail_response
-    @response = Response.new(false, 0)
-  end
 end
