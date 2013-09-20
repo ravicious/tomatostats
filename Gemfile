@@ -25,6 +25,7 @@ group :development do
   gem 'quiet_assets'
   gem 'guard'
   gem 'guard-bundler'
+  gem 'guard-rspec'
 end
 
 gem 'time_diff'
