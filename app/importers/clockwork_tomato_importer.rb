@@ -1,3 +1,5 @@
+require 'csv'
+
 class ClockworkTomatoImporter < Importer
 
   private
@@ -17,8 +19,12 @@ class ClockworkTomatoImporter < Importer
   end
 
   def parse_lines(lines)
-    CSV.parse(lines.join) do |row|
-      create_and_assign_pomodoro(started_at: row[5], finished_at: row[6])
+    begin
+      CSV.parse(lines.join) do |row|
+        create_and_assign_pomodoro(started_at: row[5], finished_at: row[6])
+      end
+    rescue TypeError, ArgumentError
+      nil
     end
   end
 
