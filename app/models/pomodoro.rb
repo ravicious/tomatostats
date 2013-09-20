@@ -1,4 +1,5 @@
 class Pomodoro < ActiveRecord::Base
+  belongs_to :user
   validate :duration_cannot_be_longer_than_1_hour
 
   def duration
