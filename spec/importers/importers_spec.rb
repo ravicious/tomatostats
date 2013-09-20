@@ -2,36 +2,30 @@ require "spec_helper"
 
 shared_examples "an importer" do
   let(:user) { create(:user) }
-  let(:importer) { described_class.instance }
+  subject { described_class.new(input: file, user: user) }
 
-  context "given a standard file" do
-    it "assigns pomodoros to a user" do
-      expect{ importer.import(file, user) }.to change(user, :pomodoros)
+  context "given a valid file" do
+    describe "#import" do
+      it "assigns pomodoros to a user" do
+        expect{ subject.import }.to change(user.pomodoros, :count)
+      end
     end
 
-    describe ".response" do
-      subject { importer.import(file, user).response }
+    describe "#imported_pomodoros" do
+      before { subject.import }
 
-      it "returns success" do
-        expect(subject.success?).to be_true
-      end
-
-      it "returns added pomodoros count" do
-        expect(subject.pomodoros_added_count).not_to be_empty
+      it "returns a list of imported pomodoros" do
+        expect(subject).to have_at_least(1).imported_pomodoros
       end
     end
   end
 
 
   context "given an invalid file" do
-    let(:file) { "#{Rails.root}/spec/support/invalid_file" }
+    let(:file) { invalid_file }
 
-    describe ".response" do
-      subject { importer.import(file, user).response }
-
-      it "returns no success" do
-        expect(subject.success?).to be_false
-      end
+    it "doesn't import any pomodoros" do
+      expect{ subject.import }.not_to change(subject, :imported_pomodoros)
     end
   end
 
@@ -39,6 +33,7 @@ end
 
 describe ClockworkTomatoImporter do
   let(:file) { "#{Rails.root}/spec/support/clockwork_tomato.csv" }
+  let(:invalid_file) { "#{Rails.root}/spec/support/clockwork_tomato_invalid.csv" }
 
   it_behaves_like "an importer"
 end
