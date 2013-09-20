@@ -11,16 +11,19 @@ class Importer
   end
 
   def response
-    @@response || FAIL_RESPONSE
-  end
-
-  def response=(res)
-    @@response = res
+    @@response ||= nil || FAIL_RESPONSE
   end
 
   def import(input, user)
+    clear_response
     read_input(input)
     create_and_assign_pomodoros_to_user(user)
     self
+  end
+
+  private
+
+  def clear_response
+    @@response = nil
   end
 end
