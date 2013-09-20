@@ -1,5 +1,3 @@
-require "spec_helper"
-
 shared_examples "an importer" do
   let(:user) { create(:user) }
   subject { described_class.new(input: file, user: user) }
@@ -28,12 +26,4 @@ shared_examples "an importer" do
       expect{ subject.import }.not_to change(subject, :imported_pomodoros)
     end
   end
-
-end
-
-describe ClockworkTomatoImporter do
-  let(:file) { "#{Rails.root}/spec/support/clockwork_tomato.csv" }
-  let(:invalid_file) { "#{Rails.root}/spec/support/clockwork_tomato_invalid.csv" }
-
-  it_behaves_like "an importer"
 end
