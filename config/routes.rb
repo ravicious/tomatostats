@@ -1,5 +1,9 @@
 Tomatostats::Application.routes.draw do
-  root 'pomodoros#index'
+  authenticated :user do
+    root 'pomodoros#index', as: "authenticated_root"
+  end
+
+  root to: 'high_voltage/pages#show', id: 'about'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   as :user do
