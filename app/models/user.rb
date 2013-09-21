@@ -18,9 +18,8 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_google_oauth(access_token)
-    data = access_token.info
-    User.find_or_create_by(provider: 'google', uid: access_token["sub"]) do |user|
-      user.name = access_token.info["name"]
+    User.find_or_create_by(provider: 'google_oauth2', uid: access_token.uid) do |user|
+      user.name = access_token.info.name
     end
   end
 
