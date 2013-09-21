@@ -1,6 +1,13 @@
 Tomatostats::Application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root 'pomodoros#index'
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  as :user do
+    get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
+    post 'sign_in' => 'devise/sessions#create', :as => :user_session
+    match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
+      :via => Devise.mappings[:user].sign_out_via
+  end
 
   resources :pomodoros, only: :index
   # The priority is based upon order of creation: first created -> highest priority.
