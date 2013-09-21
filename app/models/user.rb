@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :pomodoros
 
   def self.find_for_facebook_oauth(access_token)
-    User.find_or_create_by(provider: access_token.provider, uid: access_token.uid) do |user|
+    User.find_or_create_by(provider: 'facebook', uid: access_token.uid) do |user|
       user.name = access_token.extra.raw_info.name
     end
   end
