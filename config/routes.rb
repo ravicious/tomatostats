@@ -1,4 +1,5 @@
 Tomatostats::Application.routes.draw do
+  devise_for :users
   root 'pomodoros#index'
 
   resources :pomodoros, only: :index
