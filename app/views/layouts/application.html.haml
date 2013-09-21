@@ -23,7 +23,10 @@
       = menu_group do
         = menu_item "Pomodoros", pomodoros_path
       = menu_group pull: :right do
-        = menu_item "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+        - unless current_user
+          = menu_item "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+        - else
+          = menu_text image_tag(current_user.avatar_url(25)) + " " + current_user
 
     .container
 
