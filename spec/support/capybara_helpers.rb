@@ -1,6 +1,6 @@
-def sign_in
+def sign_in(provider: "Facebook")
   visit '/'
-  click_link "with Facebook"
+  click_link "with #{provider}"
 end
 
 def import_pomodoros(input)
