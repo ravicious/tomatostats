@@ -14,4 +14,28 @@ class Pomodoro < ActiveRecord::Base
     end
   end
 
+  def self.done_weeks_ago(number_of)
+    self.done_some_time_ago(number_of, 'week')
+  end
+
+  def self.done_months_ago(number_of)
+    self.done_some_time_ago(number_of, 'month')
+  end
+
+  def self.done_this_week
+    self.done_weeks_ago(0)
+  end
+
+  def self.done_this_month
+    self.done_months_ago(0)
+  end
+
+  private
+
+  def self.done_some_time_ago(number_of, time_range_type)
+    beginning_of_time_range_in_seconds = eval("#{number_of}.#{time_range_type}s.ago.to_date." +
+                                              "at_beginning_of_#{time_range_type}.to_time.to_i")
+    where("started_at >= ?", beginning_of_time_range_in_seconds)
+  end
+
 end
