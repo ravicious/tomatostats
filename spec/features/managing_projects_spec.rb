@@ -3,7 +3,7 @@ require "spec_helper"
 feature "Managing Projects" do
   background do
     sign_in
-    import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato_new.csv")
+    import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
   end
 
   scenario "Creating a project" do
