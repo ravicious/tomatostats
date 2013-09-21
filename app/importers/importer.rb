@@ -8,8 +8,12 @@ class Importer
     @imported_pomodoros = 0
   end
 
-  def importers
-    @@importers ||= Hash.new(EmptyImporter)
+  # TODO: refactor this to be valid
+  # with open/closed principle
+  def self.importers
+    Hash.new(EmptyImporter).tap do |hash|
+      hash['Clockwork Tomato'] = ClockworkTomatoImporter
+    end
   end
 
   def import
