@@ -15,15 +15,15 @@ feature "Importing Pomodoros" do
       select "Clockwork Tomato", from: "Application"
       click_button "Submit"
 
-      expect(page.path).to eq(root_path)
-      expect(page).to have_css(".pomodoros li", count: 3)
+      expect(current_path).to eq(root_path)
+      expect(page).to have_css(".pomodoros li", count: 13)
     end
 
     scenario "Importing new pomodoros" do
       import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato_old.csv")
       import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
 
-      expect(page).to have_css(".pomodoros li", count: 5)
+      expect(page).to have_css(".pomodoros li", count: 15)
     end
 
   end
