@@ -30,3 +30,4 @@ end
 
 gem 'time_diff'
 gem 'haml-rails'
+gem 'simple_form'
