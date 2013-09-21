@@ -24,9 +24,12 @@
         = menu_item "Pomodoros", pomodoros_path
       = menu_group pull: :right do
         - unless current_user
-          = menu_item "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+          = drop_down "Sign in" do
+            = menu_item "with Facebook", user_omniauth_authorize_path(:facebook)
         - else
-          = menu_text image_tag(current_user.avatar_url(25)) + " " + current_user
+          %li= menu_text image_tag(current_user.avatar_url(25))
+          = drop_down current_user do
+            = menu_item "Sign out", destroy_user_session_path, method: :delete
 
     .container
 
