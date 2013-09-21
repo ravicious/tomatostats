@@ -1,13 +1,13 @@
 .well
   %h1 Your pomodoros
 
-  - if current_user
-    %ul.stats
-      %li= "#{current_user.pomodoros.done_this_week.count} pomodoros this week"
-      %li= "#{current_user.pomodoros.done_this_month.count} pomodoros this month"
-      %li= "#{current_user.pomodoros.count} pomodoros in overall"
-    %ul.pomodoros
-      - current_user.pomodoros.each do |pomodoro|
-        %li
-          Pomodoro:
-          = pomodoro.duration[:diff]
+  %ul.pomodoros
+    - pomodoros.each do |pomodoro|
+      %li
+        Pomodoro:
+        = pomodoro.duration[:diff]
+
+  %ul.stats
+    %li= "#{pomodoros.done_this_week.size} pomodoros this week"
+    %li= "#{pomodoros.done_this_month.size} pomodoros this month"
+    %li= "#{pomodoros.size} pomodoros in overall"
