@@ -6,10 +6,10 @@ class ImportsController < ApplicationController
 
   def create
     file = params[:import][:file].path
-    @import = Importer.importers[params[:import][:application]].new(input: file, user: current_user)
-    @import.import
-    if @import.imported_pomodoros > 0
-      flash[:notice] = "#{TextHelper.pluralize(@import.imported_pomodoros, "pomodoro")} imported."
+    @importer = Importer.importers[params[:import][:application]].new(input: file, user: current_user)
+    @importer.import
+    if @importer.imported_pomodoros.size > 0
+      flash[:notice] = "#{TextHelper.pluralize(@importer.imported_pomodoros.size, "pomodoro")} imported."
     else
       flash[:notice] = "Zero new pomodoros imported."
     end

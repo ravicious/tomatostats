@@ -5,7 +5,7 @@ class Importer
   def initialize(args = {})
     @input = args[:input]
     @user = args[:user]
-    @imported_pomodoros = 0
+    @imported_pomodoros = []
   end
 
   # TODO: refactor this to be valid
@@ -17,21 +17,16 @@ class Importer
   end
 
   def import
-    count_imported_pomodoros do
-      custom_import
-    end
+    custom_import
   end
 
   private
 
   def create_and_assign_pomodoro(args = {})
-    @user.pomodoros.find_or_create_by(args)
-  end
-
-  def count_imported_pomodoros(&block)
-    pomodoros_before = @user.pomodoros.count
-    yield
-    @imported_pomodoros = @user.pomodoros.count - pomodoros_before
+    pomodoro = @user.pomodoros.find_or_initialize_by(args)
+    if pomodoro.new_record?
+      @imported_pomodoros.push(pomodoro) if pomodoro.save
+    end
   end
 
 end
