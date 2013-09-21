@@ -26,6 +26,7 @@ group :development do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rspec'
+  gem 'guard-rails'
 end
 
 gem 'time_diff'
