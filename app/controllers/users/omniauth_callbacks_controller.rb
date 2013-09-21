@@ -3,6 +3,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     oauth(:find_for_facebook_oauth, 'Facebook')
   end
 
+  def google_oauth2
+    oauth(:find_for_google_oauth, 'Google')
+  end
+
   private
 
   def oauth(user_finding_method, kind_of_authentication)
