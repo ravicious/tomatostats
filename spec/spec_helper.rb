@@ -51,4 +51,12 @@ RSpec.configure do |config|
       }
     }
   })
+
+  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+    provider: 'google_oauth2',
+    uid: '1312312365750696',
+    info: {
+      name: "John Legend"
+    }
+  })
 end
