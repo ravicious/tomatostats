@@ -14,7 +14,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def avatar_url(height=180)
+    send("#{provider}_avatar_url", height)
+  end
+
   def to_s
     name
+  end
+
+  private
+
+  def facebook_avatar_url(height)
+    "http://graph.facebook.com/#{uid}/picture?type=square&height=#{height}"
   end
 end
