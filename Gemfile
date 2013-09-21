@@ -29,3 +29,4 @@ group :development do
 end
 
 gem 'time_diff'
+gem 'haml-rails'
