@@ -1,1 +1,8 @@
 %h1 Your pomodoros
+
+- if current_user
+  %ul.pomodoros
+    - current_user.pomodoros.each do |pomodoro|
+      %li
+        Pomodoro: 
+        = Time.at(pomodoro.started_at)
