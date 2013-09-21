@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   # :recoverable
   devise :rememberable, :trackable, :omniauthable,
          omniauth_providers: [:facebook]
+
+  validates_presence_of :provider, :uid
+
   has_many :pomodoros
 
   def self.find_for_facebook_oauth(access_token)
