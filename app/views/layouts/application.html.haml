@@ -29,7 +29,7 @@
         - else
           %li= menu_text image_tag(current_user.avatar_url(25))
           = drop_down current_user do
-            = menu_item "Sign out", destroy_user_session_path, method: :delete
+            = menu_item "Sign out", destroy_session_path, method: :delete
 
     .container
 

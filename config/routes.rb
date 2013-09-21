@@ -3,9 +3,9 @@ Tomatostats::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   as :user do
-    get 'sign_in' => 'devise/sessions#new', :as => :new_user_session
-    post 'sign_in' => 'devise/sessions#create', :as => :user_session
-    match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session,
+    get 'sign_in' => 'devise/sessions#new', :as => :new_session
+    post 'sign_in' => 'devise/sessions#create', :as => :session
+    match 'sign_out' => 'devise/sessions#destroy', :as => :destroy_session,
       :via => Devise.mappings[:user].sign_out_via
   end
 
