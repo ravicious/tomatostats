@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
       user.name = access_token.extra.raw_info.name
     end
   end
+
+  def to_s
+    name
+  end
 end
