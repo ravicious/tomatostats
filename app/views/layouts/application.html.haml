@@ -19,19 +19,11 @@
 
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand(href="#") Tomatostats
-          .container.nav-collapse
-            %ul.nav
-              %li= link_to "Link 1", "/path1"
-              %li= link_to "Link 2", "/path2"
-              %li= link_to "Link 3", "/path3"
+    = nav_bar fixed: :top, brand: "TomatoStats" do
+      = menu_group do
+        = menu_item "Pomodoros", pomodoros_path
+      = menu_group pull: :right do
+        = menu_item "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
     .container
 
