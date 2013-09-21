@@ -23,8 +23,10 @@ feature "Importing Pomodoros" do
 
     scenario "Importing new pomodoros" do
       import_pomodoros(file_with_old_pomodoros)
-      import_pomodoros(file)
+      expect(page).to have_text("13 pomodoros imported.")
 
+      import_pomodoros(file)
+      expect(page).to have_text("2 pomodoros imported.")
       expect(page).to have_css(".pomodoros li", count: 15)
     end
 
