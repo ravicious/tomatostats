@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     "http://graph.facebook.com/#{uid}/picture?type=square&height=#{height}"
   end
 
-  def google_avatar_url(height)
+  def google_oauth2_avatar_url(height)
     "https://profiles.google.com/s2/photos/profile/#{uid}?sz=#{height}"
   end
 end
