@@ -40,4 +40,15 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+    provider: 'facebook',
+    uid: '1365750696',
+    extra: {
+      raw_info: {
+        name: "Rafal Cieslak"
+      }
+    }
+  })
 end
