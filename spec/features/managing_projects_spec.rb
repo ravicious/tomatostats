@@ -9,10 +9,10 @@ feature "Managing Projects" do
   scenario "Creating a project" do
     click_link "Add project"
     fill_in "Name", with: "Awesome Project"
-    click_button "Add project"
+    click_button "Create Project"
 
     expect(page).to have_text("Awesome Project")
-    expect(page.path).to eq(root_path)
+    expect(current_path).to eq(root_path)
   end
 
   scenario "Assigning pomodoros to a project" do
