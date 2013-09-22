@@ -16,6 +16,7 @@ feature "Managing Projects" do
   end
 
   scenario "Assigning pomodoros to a project" do
+    pending "First make checkboxes for pomodoros"
     create_project "Twerking Hard"
 
     # TODO Inspect pomodoro checkboxes
