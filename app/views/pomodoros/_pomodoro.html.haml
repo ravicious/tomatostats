@@ -1,5 +1,6 @@
-%tr
+%tr.pomodoro
   %td= check_box_tag "pomodoros[]", pomodoro.id, false, id: "pomodoro-#{pomodoro.id}"
   %td= Time.at(pomodoro.started_at).to_s(:short)
   %td= Time.at(pomodoro.finished_at).to_s(:short)
   %td= pomodoro.duration[:diff]
+  %td= pomodoro.has_project? ? link_to(pomodoro.project, pomodoro.project) : ""

@@ -18,3 +18,10 @@ def check_first_three_pomodoros
     end
   end
 end
+
+def create_project(name: "Doesn't matter")
+  visit '/'
+  click_link "Add project"
+  fill_in "Name", with: name
+  click_button "Create Project"
+end

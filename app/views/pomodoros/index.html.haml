@@ -4,6 +4,11 @@
 
 %h1 Your pomodoros
 
-= form_tag destroy_multiple_pomodoros_path, method: :delete do
-  = submit_tag "Delete selected", class: 'btn'
+= form_tag destroy_multiple_or_assign_pomodoros_path, method: :post, class: 'inline' do
+  .input-prepend
+    = submit_tag "Delete pomodoros", class: 'btn', name: 'delete_multiple', data: { confirm: "Are you sure?" }
+  .input-append
+    .add-on Project
+    = select_tag "Project", options_from_collection_for_select(projects, "id", "name"), name: "project"
+    = submit_tag "Assign pomodoros", class: 'btn', name: 'assign'
   = render 'table'

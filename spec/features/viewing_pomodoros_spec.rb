@@ -40,7 +40,7 @@ feature "Viewing Pomodoros" do
 
   scenario "Deleting pomodoros" do
     check_first_three_pomodoros
-    click_button "Delete selected"
+    click_button "Delete pomodoros"
 
     expect(page).to have_text "3 pomodoros deleted."
   end

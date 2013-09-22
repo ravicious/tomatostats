@@ -16,17 +16,13 @@ feature "Managing Projects" do
   end
 
   scenario "Assigning pomodoros to a project" do
-    pending "First make checkboxes for pomodoros"
-    create_project "Twerking Hard"
+    create_project name: "Twerking Hard"
 
-    # TODO Inspect pomodoro checkboxes
-    check('pomodoro')
+    check_first_three_pomodoros
 
     select "Twerking Hard", from: "Project"
     click_button "Assign"
 
-    click_link "Twerking Hard"
-    expect(page).to have_text("5 pomodoros this week")
-    expect(page).to have_css(".pomodoros li", count: 5)
+    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
   end
 end
