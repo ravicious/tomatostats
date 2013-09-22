@@ -4,11 +4,14 @@
 .well
   %h1 Your pomodoros
 
-  %ul.pomodoros
-    - pomodoros.each do |pomodoro|
-      %li
-        Pomodoro:
-        = pomodoro.duration[:diff]
+  = form_tag destroy_multiple_pomodoros_path, method: :delete do
+    = submit_tag "Delete selected"
+    %ul.pomodoros
+      - pomodoros.each do |pomodoro|
+        %li
+          = check_box_tag "pomodoros[]", pomodoro.id, false, id: "pomodoro-#{pomodoro.id}"
+          Pomodoro:
+          = pomodoro.duration[:diff]
 
   %ul.stats
     %li= "#{pomodoros.done_this_week.size} pomodoros this week"
