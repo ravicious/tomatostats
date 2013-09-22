@@ -7,6 +7,15 @@ class PomodorosController < ApplicationController
 
   end
 
+  def destroy_multiple_or_assign
+    if params[:assign]
+    elsif params[:delete_multiple]
+      destroy_multiple
+    end
+  end
+
+  private
+
   def destroy_multiple
     pomodoros.delete(*params[:pomodoros])
 
