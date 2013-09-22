@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates_presence_of :provider, :uid
 
   has_many :pomodoros, dependent: :destroy
+  has_many :projects, dependent: :destroy
 
   def self.find_for_facebook_oauth(access_token)
     User.find_or_create_by(provider: 'facebook', uid: access_token.uid) do |user|
