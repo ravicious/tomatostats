@@ -9,6 +9,6 @@
     = submit_tag "Delete pomodoros", class: 'btn', name: 'delete_multiple', data: { confirm: "Are you sure?" }
   .input-append
     .add-on Project
-    = select_tag "Project", options_from_collection_for_select(projects, "id", "name")
+    = select_tag "Project", options_from_collection_for_select(projects, "id", "name"), name: "project"
     = submit_tag "Assign pomodoros", class: 'btn', name: 'assign'
   = render 'table'
