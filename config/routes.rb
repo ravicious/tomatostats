@@ -13,7 +13,11 @@ Tomatostats::Application.routes.draw do
       :via => Devise.mappings[:user].sign_out_via
   end
 
-  resources :pomodoros, only: :index
+  resources :pomodoros, only: :index do
+    collection do
+      delete 'destroy_multiple'
+    end
+  end
   resources :imports
   resources :projects
   # The priority is based upon order of creation: first created -> highest priority.
