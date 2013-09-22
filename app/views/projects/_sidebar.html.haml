@@ -1,6 +1,7 @@
-%h3 Projects
-%ul.nav.nav-list
-  -# %li.nav-header Projects
-  - projects.each do |project|
-    %li= link_to project, project
-%p= link_to "Add project", new_project_path
+= sidebar do
+  %h3 Projects
+  %ul.nav.nav-list
+    -# %li.nav-header Projects
+    - projects.each do |project|
+      %li= link_to project, project
+  %p= link_to "Add project", new_project_path

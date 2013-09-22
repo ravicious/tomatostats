@@ -41,8 +41,7 @@
           = yield
         - if content_for?(:sidebar)
           .span3
-            .well.sidebar-nav
-              = yield(:sidebar)
+            = yield(:sidebar)
 
       %footer
         = link_to 'About', page_path('about')
