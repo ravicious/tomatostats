@@ -1,5 +1,6 @@
 class Pomodoro < ActiveRecord::Base
   belongs_to :user
+  belongs_to :project
   validate :duration_cannot_be_longer_than_1_hour
   validates_uniqueness_of :started_at, :finished_at, scope: :user
   validates_numericality_of :started_at, :finished_at
