@@ -18,7 +18,7 @@ feature "Importing Pomodoros" do
       click_button "Submit"
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_css(".pomodoros li", count: 13)
+      expect(page).to have_css(".pomodoros tr", count: 13)
     end
 
     scenario "Importing new pomodoros" do
@@ -27,7 +27,7 @@ feature "Importing Pomodoros" do
 
       import_pomodoros(file)
       expect(page).to have_text("2 pomodoros imported.")
-      expect(page).to have_css(".pomodoros li", count: 15)
+      expect(page).to have_css(".pomodoros tr", count: 15)
     end
 
   end
@@ -39,7 +39,7 @@ feature "Importing Pomodoros" do
     sign_in(provider: "Google")
     import_pomodoros(file)
 
-    expect(page).to have_css(".pomodoros li", count: 15)
+    expect(page).to have_css(".pomodoros tr", count: 15)
   end
 
 end
