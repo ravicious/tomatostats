@@ -32,6 +32,10 @@ class Pomodoro < ActiveRecord::Base
     self.done_months_ago(0)
   end
 
+  def has_project?
+    project_id
+  end
+
   private
 
   def self.done_some_time_ago(number_of, time_range_type)
