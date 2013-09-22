@@ -32,10 +32,17 @@ feature "Viewing Pomodoros" do
   #   end
   # end
 
-  scenario "Show statistics" do
+  scenario "Displaying statistics" do
     expect(page).to have_text "5 pomodoros this week"
     expect(page).to have_text "10 pomodoros this month"
     expect(page).to have_text "15 pomodoros in overall"
+  end
+
+  scenario "Deleting pomodoros" do
+    check_first_three_pomodoros
+    click_button "Delete selected"
+
+    expect(page).to have_text "3 pomodoros deleted."
   end
 
   # context "with JavaScript enabled", js: true do
