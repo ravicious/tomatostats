@@ -23,8 +23,6 @@ feature "Managing Projects" do
     select "Twerking Hard", from: "Project"
     click_button "Assign"
 
-    click_link "Twerking Hard"
-    expect(page).to have_text("5 pomodoros this week")
-    expect(page).to have_css(".pomodoros li", count: 5)
+    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
   end
 end
