@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-header
+    %h1.panel-title Projects
+  .panel-body
+    %ul.projects
+      - projects.each do |project|
+        = link_to project, project
