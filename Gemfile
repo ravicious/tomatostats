@@ -32,7 +32,7 @@ end
 
 gem 'time_diff'
 gem 'haml-rails'
-gem 'simple_form'
+gem 'simple_form', github: "plataformatec/simple_form"
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 gem 'devise'

@@ -6,6 +6,14 @@ GIT
       railties (>= 3.0)
       sass (>= 3.2)
 
+GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: 028e762f00645fcd89ef213c9c74d9bfcf7222f5
+  specs:
+    simple_form (3.0.0)
+      actionpack (>= 4.0.0, < 4.1)
+      activemodel (>= 4.0.0, < 4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -201,7 +209,6 @@ GEM
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    simple_form (1.4.1)
     slop (3.4.6)
     sprockets (2.10.0)
       hike (~> 1.2)
@@ -268,7 +275,7 @@ DEPENDENCIES
   rails (= 4.0.0)
   rspec-rails (~> 2.14.0)
   sass-rails (~> 4.0.0)
-  simple_form
+  simple_form!
   therubyracer
   time_diff
   timecop
