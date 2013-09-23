@@ -52,11 +52,11 @@
     .container
 
       .row
-        .span9
+        .col-md-9
           -# = bootstrap_flash
           = yield
         - if content_for?(:sidebar)
-          .span3
+          .col-md-3
             = yield(:sidebar)
 
       %footer
