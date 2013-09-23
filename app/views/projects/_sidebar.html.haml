@@ -1,6 +1,4 @@
-= sidebar do
-  %h3 Projects
-  %ul.nav.nav-list
+= sidebar title: "Projects" do
     -# %li.nav-header Projects
     - projects.each do |project|
       %li= link_to project, project

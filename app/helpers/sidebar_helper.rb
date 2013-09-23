@@ -1,4 +1,4 @@
-module ApplicationHelper
+module SidebarHelper
   def sidebar(title: false, &block)
     content_tag(:div, class: 'panel panel-default') do
       sidebar_title(title) + sidebar_body{yield}
@@ -17,11 +17,7 @@ module ApplicationHelper
 
   def sidebar_body(&block)
     content_tag(:div, class: 'panel-body') do
-      yield block
+      yield
     end
-  end
-
-  def glyph(name, white: false, space: true)
-    content_tag(:i, nil, class: "icon-#{name}#{" icon-white" if white}") + (space ? " " : "")
   end
 end
