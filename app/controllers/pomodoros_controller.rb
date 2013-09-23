@@ -7,11 +7,11 @@ class PomodorosController < ApplicationController
 
   end
 
-  def destroy_multiple_or_assign
+  def delete_multiple_or_assign
     if params[:assign]
       assign
     elsif params[:delete_multiple]
-      destroy_multiple
+      delete_multiple
     else
       redirect root_path
     end
@@ -19,7 +19,7 @@ class PomodorosController < ApplicationController
 
   private
 
-  def destroy_multiple
+  def delete_multiple
     pomodoros.delete(*params[:pomodoros])
 
     flash[:notice] = "#{TextHelper.pluralize(params[:pomodoros].size, "pomodoro")} deleted."
