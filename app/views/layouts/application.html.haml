@@ -33,9 +33,9 @@
           %li= link_to "Import pomodoros", new_import_path
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
-            %p.navbar-text= image_tag(current_user.avatar_url(25))
             %li.dropdown
               %a.dropdown-toggle{href: "#", data: { toggle: 'dropdown' }}
+                -# = image_tag(current_user.avatar_url(25), class: 'avatar')
                 = current_user
                 %b.caret
               %ul.dropdown-menu
