@@ -36,4 +36,16 @@ feature "Managing Projects" do
       end
     end
   end
+
+  scenario "Project page" do
+    project_name = "Awesome project, great job!"
+
+    create_project name: project_name
+    click_link "Projects"
+    click_link project_name
+
+    within('.panel') do
+      expect(page).to have_text(project_name)
+    end
+  end
 end
