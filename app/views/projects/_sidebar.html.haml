@@ -1,7 +1,6 @@
-= sidebar do
-  %h3 Projects
-  %ul.nav.nav-list
+= sidebar title: "Projects" do
+  %ul.nav.nav-pills.nav-stacked
     -# %li.nav-header Projects
     - projects.each do |project|
       %li= link_to project, project
-  %p.text-right= link_to "Add project", new_project_path
+  = link_to "Add project", new_project_path, class: 'btn btn-default pull-right'

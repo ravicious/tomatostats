@@ -9,7 +9,7 @@ class ImportsController < ApplicationController
     @importer = Importer.importers[params[:import][:application]].new(input: file, user: current_user)
     @importer.import
     if @importer.imported_pomodoros.size > 0
-      flash[:notice] = "#{TextHelper.pluralize(@importer.imported_pomodoros.size, "pomodoro")} imported."
+      flash[:success] = "#{TextHelper.pluralize(@importer.imported_pomodoros.size, "pomodoro")} imported."
     else
       flash[:notice] = "Zero new pomodoros imported."
     end

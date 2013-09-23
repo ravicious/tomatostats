@@ -2,13 +2,17 @@
   = render 'projects/sidebar'
   = render 'stats_sidebar'
 
-%h1 Your pomodoros
+.panel.panel-default
 
-= form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'inline' do
-  .input-prepend
-    = button_tag glyph(:remove) + " Delete pomodoros", class: 'btn', name: 'delete_multiple', data: { confirm: "Are you sure?" }
-  .input-append
-    .add-on Project
-    = select_tag "Project", options_from_collection_for_select(projects, "id", "name"), name: "project"
-    = button_tag glyph(:tags, :white) + " Assign pomodoros", class: 'btn', name: 'assign'
-  = render 'table'
+  .panel-heading
+    %h1.panel-title Pomodoros
+
+  .panel-body
+    = form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'form-inline' do
+      = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default', name: 'delete_multiple', data: { confirm: "Are you sure?" }
+      .form-group
+        %label.sr-only{for: 'project'} Project
+        = select_tag "Project", options_from_collection_for_select(projects, "id", "name"),
+          name: "project", class: 'form-control', prompt: 'Select a project'
+      = button_tag glyph(:tags) + "Assign pomodoros", class: 'btn btn-default', name: 'assign'
+      = render 'table'
