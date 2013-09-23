@@ -43,6 +43,7 @@ feature "Viewing Pomodoros" do
     click_button "Delete pomodoros"
 
     expect(page).to have_text "3 pomodoros deleted."
+    expect(page).to have_css(".pomodoros tr", count: 12)
   end
 
   # context "with JavaScript enabled", js: true do
