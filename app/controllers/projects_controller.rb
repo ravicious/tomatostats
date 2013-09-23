@@ -1,11 +1,13 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:projects) { current_user.projects }
+  expose(:projects) { current_user.projects.sorted_by_name }
   expose(:project, attributes: :project_params)
 
-  def new
+  def index
+  end
 
+  def new
   end
 
   def create
