@@ -20,7 +20,7 @@ def check_first_three_pomodoros
 end
 
 def create_project(name: "Doesn't matter")
-  visit '/'
+  visit '/' if current_path != "/"
   click_link "Add project"
   fill_in "Name", with: name
   click_button "Create Project"
