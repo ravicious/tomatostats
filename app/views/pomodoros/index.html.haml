@@ -9,10 +9,10 @@
 
   .panel-body
     = form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'form-inline' do
-      = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn', name: 'delete_multiple', data: { confirm: "Are you sure?" }
+      = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default', name: 'delete_multiple', data: { confirm: "Are you sure?" }
       .form-group
         %label.sr-only{for: 'project'} Project
         = select_tag "Project", options_from_collection_for_select(projects, "id", "name"),
           name: "project", class: 'form-control', prompt: 'Select a project'
-      = button_tag glyph(:tags) + "Assign pomodoros", class: 'btn', name: 'assign'
+      = button_tag glyph(:tags) + "Assign pomodoros", class: 'btn btn-default', name: 'assign'
       = render 'table'
