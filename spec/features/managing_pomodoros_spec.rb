@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Viewing Pomodoros" do
+feature "Managing Pomodoros" do
   background do
     sign_in
     import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
