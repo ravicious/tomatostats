@@ -1,6 +1,6 @@
 class PomodorosController < ApplicationController
   before_filter :authenticate_user!
-  expose(:pomodoros) { current_user.pomodoros }
+  expose(:pomodoros) { current_user.pomodoros.includes(:project).sorted_by_started_at }
   expose(:projects) { current_user.projects }
 
   def index
