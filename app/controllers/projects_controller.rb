@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
 
   def create
     if project.save
+      flash[:success] = "Project #{project} added."
       redirect_to root_path
     else
       render :new
