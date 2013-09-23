@@ -25,4 +25,15 @@ feature "Managing Projects" do
 
     expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
   end
+
+  scenario "Projects index" do
+    7.times {|n| create_project(name: "Project ##{n+1}") }
+    click_link "Projects"
+
+    within('.projects') do
+      7.times do |n|
+        expect(page).to have_text("Project ##{n+1}")
+      end
+    end
+  end
 end
