@@ -53,7 +53,10 @@
 
       .row
         .col-md-9
-          -# = bootstrap_flash
+          - flash.each do |key, value|
+            %div{class: [flash_class(key), 'alert-dismissable']}
+              %button.close{data: {dismiss: 'alert'}, aria: {hidden: true}} &times;
+              = value
           = yield
         - if content_for?(:sidebar)
           .col-md-3
