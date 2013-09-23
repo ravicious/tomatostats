@@ -33,7 +33,8 @@ end
 gem 'time_diff'
 gem 'haml-rails'
 gem 'simple_form'
-gem 'twitter-bootstrap-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
