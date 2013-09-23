@@ -7,4 +7,8 @@ class Project < ActiveRecord::Base
   def to_s
     name
   end
+
+  def self.sorted_by_name
+    order("name ASC")
+  end
 end
