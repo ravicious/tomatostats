@@ -20,7 +20,7 @@ class PomodorosController < ApplicationController
   private
 
   def delete_multiple
-    pomodoros.delete(*params[:pomodoros])
+    pomodoros.delete(params[:pomodoros])
 
     flash[:notice] = "#{TextHelper.pluralize(params[:pomodoros].size, "pomodoro")} deleted."
     redirect_to root_path
