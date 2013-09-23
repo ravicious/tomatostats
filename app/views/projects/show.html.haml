@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title= project.name
+  .panel-body
+    %h3 Stats
+    %ul
+      %li= "#{project.pomodoros.done_this_week.size} pomodoros this week"
+      %li= "#{project.pomodoros.done_this_month.size} pomodoros this month"
+      %li= "#{project.pomodoros.size} pomodoros in overall"
