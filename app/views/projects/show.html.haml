@@ -3,7 +3,7 @@
     %h1.panel-title= project.name
   .panel-body
     .btn-group
-      = link_to "Edit", edit_project_path(project), class: 'btn btn-default'
+      = link_to "Edit", edit_project_path(project), class: 'btn btn-primary'
     %h3 Stats
     %ul
       %li= "#{project.pomodoros.done_this_week.size} pomodoros this week"
