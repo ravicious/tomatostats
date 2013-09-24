@@ -31,7 +31,7 @@ feature "Managing Projects" do
     7.times {|n| create_project(name: "Project ##{n+1}") }
     click_link "Projects"
 
-    within('.projects') do
+    within('.panel .projects') do
       7.times do |n|
         expect(page).to have_text("Project ##{n+1}")
       end
@@ -41,9 +41,9 @@ feature "Managing Projects" do
   scenario "Project page" do
     create_project name: project_name
     click_link "Projects"
-    click_link project_name
-
     within('.panel') do
+      click_link project_name
+
       expect(page).to have_text(project_name)
     end
   end
@@ -51,7 +51,7 @@ feature "Managing Projects" do
   scenario "Editing a project" do
     create_project name: "My awesome project"
     click_link "Projects"
-    click_link "My awesome project"
+    within('.panel .projects') { click_link "My awesome project" }
     click_link "Edit"
 
     fill_in "Name", with: "My great project"
@@ -65,7 +65,7 @@ feature "Managing Projects" do
     assign_pomodoros_to_a_project project: project_name
 
     click_link "Projects"
-    click_link project_name
+    within('.panel .projects') { click_link(project_name) }
     click_link "Delete"
     visit pomodoros_path
 
