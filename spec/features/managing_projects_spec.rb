@@ -48,4 +48,16 @@ feature "Managing Projects" do
       expect(page).to have_text(project_name)
     end
   end
+
+  scenario "Editing a project" do
+    create_project name: "My awesome project"
+    click_link "Projects"
+    click_link "My awesome project"
+    click_link "Edit"
+
+    fill_in "Name", with: "My great project"
+    click_button "Update Project"
+
+    expect(page).to have_content("My great project")
+  end
 end
