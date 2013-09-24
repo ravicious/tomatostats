@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
+  respond_to :html
 
   expose(:projects) { current_user.projects.sorted_by_name.includes(:pomodoros) }
   expose(:project, attributes: :project_params)
@@ -20,6 +21,11 @@ class ProjectsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    flash[:success] = "Project #{project} deleted." if project.destroy
+    respond_with project
   end
 
   private
