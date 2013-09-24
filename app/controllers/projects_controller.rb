@@ -13,12 +13,24 @@ class ProjectsController < ApplicationController
   def new
   end
 
+  def edit
+  end
+
   def create
     if project.save
       flash[:success] = "Project #{project} added."
       redirect_to root_path
     else
       render :new
+    end
+  end
+
+  def update
+    if project.save
+      flash[:success] = "Project #{project} updated."
+      redirect_to project
+    else
+      render :edit
     end
   end
 
