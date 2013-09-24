@@ -4,29 +4,28 @@ class PomodorosController < ApplicationController
   expose(:projects) { current_user.projects.sorted_by_name }
 
   def delete_multiple_or_assign
+    @pomodoros_array = params[:pomodoros]
+
     if params[:assign]
       assign
     elsif params[:delete_multiple]
       delete_multiple
-    else
-      redirect root_path
     end
+
+    redirect_to root_path
   end
 
   private
 
   def delete_multiple
-    pomodoros.delete(params[:pomodoros])
-
-    flash[:success] = "#{TextHelper.pluralize(params[:pomodoros].size, "pomodoro")} deleted."
-    redirect_to root_path
+    pomodoros.delete(@pomodoros_array)
+    flash[:success] = "#{TextHelper.pluralize(@pomodoros_array.size, "pomodoro")} deleted."
   end
 
   def assign
     if project = projects.find_by_id(params[:project])
-      pomodoros.where(id: params[:pomodoros]).update_all(project_id: project.id)
-      flash[:success] = "#{TextHelper.pluralize(params[:pomodoros].size, "pomodoro")} assigned."
+      pomodoros.where(id: @pomodoros_array).update_all(project_id: project.id)
+      flash[:success] = "#{TextHelper.pluralize(@pomodoros_array.size, "pomodoro")} assigned."
     end
-    redirect_to root_path
   end
 end
