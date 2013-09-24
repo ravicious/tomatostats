@@ -3,9 +3,6 @@ class PomodorosController < ApplicationController
   expose(:pomodoros) { current_user.pomodoros.includes(:project).sorted_by_started_at }
   expose(:projects) { current_user.projects.sorted_by_name }
 
-  def index
-  end
-
   def delete_multiple_or_assign
     if params[:assign]
       assign
