@@ -4,18 +4,6 @@ class ProjectsController < ApplicationController
   expose(:projects) { current_user.projects.sorted_by_name.includes(:pomodoros) }
   expose(:project, attributes: :project_params)
 
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
   def create
     if project.save
       flash[:success] = "Project #{project} added."
