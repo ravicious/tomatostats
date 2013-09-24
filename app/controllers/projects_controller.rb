@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
 
-  expose(:projects) { current_user.projects.sorted_by_name }
+  expose(:projects) { current_user.projects.sorted_by_name.includes(:pomodoros) }
   expose(:project, attributes: :project_params)
 
   def index

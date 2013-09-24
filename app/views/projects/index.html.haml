@@ -2,6 +2,8 @@
   .panel-heading
     %h1.panel-title Projects
   .panel-body
-    %ul.projects
+    %div.projects.list-group.col-md-5
       - projects.each do |project|
-        %li= link_to project, project
+        = link_to project, class: 'list-group-item' do
+          = project.name
+          .badge= pluralize(project.pomodoros.size, "pomodoro") if project.pomodoros.any?
