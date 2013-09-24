@@ -1,6 +1,7 @@
 require "spec_helper"
 
 feature "Managing Projects" do
+  let(:project_name) { "Awesome project, great job!" }
   background do
     sign_in
     import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
@@ -38,8 +39,6 @@ feature "Managing Projects" do
   end
 
   scenario "Project page" do
-    project_name = "Awesome project, great job!"
-
     create_project name: project_name
     click_link "Projects"
     click_link project_name
@@ -59,5 +58,19 @@ feature "Managing Projects" do
     click_button "Update Project"
 
     expect(page).to have_content("My great project")
+  end
+
+  scenario "Destroying a project" do
+    create_project name: project_name
+    assign_pomodoros_to_a_project project: project_name
+
+    click_link "Projects"
+    click_link project_name
+    click_link "Delete"
+    visit pomodoros_path
+
+    within('.pomodoros') do
+      expect(page).not_to have_content(project_name)
+    end
   end
 end
