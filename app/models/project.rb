@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :user
-  has_many :pomodoros
+  has_many :pomodoros, dependent: :nullify
   validates_presence_of :name, :user
   validates_uniqueness_of :name, scope: :user
 
