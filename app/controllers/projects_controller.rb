@@ -15,12 +15,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if project.save
-      flash[:success] = "Project #{project} updated."
-      redirect_to project
-    else
-      render :edit
-    end
+    flash[:success] = "Project #{project} updated." if project.save
+    respond_with project
   end
 
   def destroy
