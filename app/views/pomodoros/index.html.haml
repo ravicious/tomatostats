@@ -7,6 +7,8 @@
     %h1.panel-title Pomodoros
 
   .panel-body
+    #calendar
+
     = form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'form-inline' do
       = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default', name: 'delete_multiple', data: { confirm: "Are you sure?" }
       .form-group
