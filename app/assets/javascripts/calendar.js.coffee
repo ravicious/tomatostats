@@ -2,6 +2,8 @@ jQuery ->
   $('#calendar').fullCalendar({
     defaultView: 'agendaWeek',
     selectable: true,
+    allDaySlot: false,
+    firstHour: 8,
     events: '/pomodoros.json',
     eventDataTransform: (eventData) ->
       {
