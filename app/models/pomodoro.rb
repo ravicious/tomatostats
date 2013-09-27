@@ -16,6 +16,10 @@ class Pomodoro < ActiveRecord::Base
     end
   end
 
+  def self.time_filtered(started: 0, finished: Time.current.to_i)
+    where("started_at >= ? and finished_at <= ?", started, finished)
+  end
+
   def self.sorted_by_started_at
     order('started_at DESC')
   end
