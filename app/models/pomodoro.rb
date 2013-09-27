@@ -20,6 +20,18 @@ class Pomodoro < ActiveRecord::Base
     where("started_at >= ? and finished_at <= ?", started, finished)
   end
 
+  def self.for_json
+    joins(
+      "LEFT OUTER JOIN projects ON projects.id = pomodoros.project_id"
+    ).select(
+      "pomodoros.id, pomodoros.started_at, pomodoros.finished_at, projects.name as project_name"
+    )
+  end
+
+  def self.for_html
+    includes(:project)
+  end
+
   def self.sorted_by_started_at
     order('started_at DESC')
   end
