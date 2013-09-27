@@ -16,8 +16,12 @@ class Pomodoro < ActiveRecord::Base
     end
   end
 
-  def self.time_filtered(started: 0, finished: Time.current.to_i)
-    where("started_at >= ? and finished_at <= ?", started, finished)
+  def self.time_filtered(args = {})
+    args[:started] = 0 if args[:started].blank?
+    args[:finished] = Time.current.to_i if args[:finished].blank?
+
+    where("started_at >= ? and finished_at <= ?",
+          args[:started], args[:finished])
   end
 
   def self.for_json

@@ -9,8 +9,8 @@ class PomodorosController < ApplicationController
       format.html { self.pomodoros = pomodoros.for_html }
       format.json {
         self.pomodoros = pomodoros.for_json.time_filtered(
-          started: params[:start].presence || 0,
-          finished: params[:end].presence || Time.current.to_i
+          started: params[:start],
+          finished: params[:end]
         )
         render json: pomodoros
       }
