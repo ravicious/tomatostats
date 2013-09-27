@@ -18,6 +18,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'timecop'
+  gem 'capybara-webkit'
 end
 
 group :development do

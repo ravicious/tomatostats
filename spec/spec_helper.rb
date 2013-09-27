@@ -59,4 +59,6 @@ RSpec.configure do |config|
       name: "John Legend"
     }
   })
+
+  Capybara.javascript_driver = :webkit
 end
