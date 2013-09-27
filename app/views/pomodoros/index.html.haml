@@ -1,6 +1,3 @@
-- content_for :sidebar do
-  = render 'stats_sidebar'
-
 .panel.panel-default
 
   .panel-heading
@@ -17,3 +14,5 @@
           name: "project", class: 'form-control', prompt: 'Select a project'
       = button_tag glyph(:tags) + "Assign pomodoros", class: 'btn btn-default', name: 'assign'
       = render 'table'
+
+= render 'stats_sidebar'
