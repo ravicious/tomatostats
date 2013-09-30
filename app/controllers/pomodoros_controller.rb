@@ -42,7 +42,4 @@ class PomodorosController < ApplicationController
       flash[:success] = "#{TextHelper.pluralize(@pomodoros_array.size, "pomodoro")} assigned."
     end
   end
-
-  def pomodoros_for_json
-  end
 end
