@@ -1,8 +1,10 @@
 class PomodorosController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :find_multiple_pomodoros, only: :delete_multiple_or_assign
+  respond_to :html, :json
+
   expose(:pomodoros) { current_user.pomodoros }
   expose(:projects) { current_user.projects.sorted_by_name }
-  respond_to :html, :json
 
   def index
     respond_to do |format|
@@ -18,8 +20,6 @@ class PomodorosController < ApplicationController
   end
 
   def delete_multiple_or_assign
-    @pomodoros_array = params[:pomodoros]
-
     if params[:assign]
       assign
     elsif params[:delete_multiple]
@@ -32,14 +32,19 @@ class PomodorosController < ApplicationController
   private
 
   def delete_multiple
-    pomodoros.delete(@pomodoros_array)
-    flash[:success] = "#{TextHelper.pluralize(@pomodoros_array.size, "pomodoro")} deleted."
+    pomodoros.delete_all
+    flash[:success] = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} deleted."
   end
 
   def assign
     if project = projects.find_by_id(params[:project])
-      pomodoros.where(id: @pomodoros_array).update_all(project_id: project.id)
-      flash[:success] = "#{TextHelper.pluralize(@pomodoros_array.size, "pomodoro")} assigned."
+      pomodoros.update_all(project_id: project.id)
+      flash[:success] = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} assigned."
     end
+  end
+
+  def find_multiple_pomodoros
+    self.pomodoros = pomodoros.where(id: params[:pomodoros])
+    @pomodoros_size = pomodoros.size
   end
 end
