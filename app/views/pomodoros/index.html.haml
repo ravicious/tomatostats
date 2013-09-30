@@ -7,6 +7,8 @@
     #calendar
 
     = form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'form-inline' do
+      = number_field_tag 'start'
+      = number_field_tag 'end'
       = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default', name: 'delete_multiple', data: { confirm: "Are you sure?" }
       .form-group
         %label.sr-only{for: 'project'} Project
