@@ -7,6 +7,32 @@ feature "Managing Pomodoros" do
     click_link "Pomodoros"
   end
 
+  scenario "Assigning pomodoros to a project" do
+    create_project name: "Twerking Hard"
+
+    check_first_three_pomodoros
+
+    select "Twerking Hard", from: "Project"
+    click_button "Assign"
+
+    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
+  end
+
+  context "with JavaScript enabled", js: true, slow: true do
+    scenario "Assigning pomodoros to a project" do
+      create_project name: "Twerking Hard"
+
+      visit pomodoros_path
+      FullCalendar.go_to_date 1379504450
+      FullCalendar.select 1379504450, 1379522410
+
+      select "Twerking Hard", from: "Project"
+      click_button "Assign"
+
+      FullCalendar.go_to_date 1379504450
+      expect(page).to have_css('#calendar', text: "Twerking Hard")
+    end
+  end
 
   # context "using 24-hour clock format" do
   #   background { set_clock_format(24) }

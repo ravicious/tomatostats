@@ -34,9 +34,10 @@ feature "Importing Pomodoros" do
 
   scenario "Two users uploading pomodoros that were done in the same time" do
     import_pomodoros(file)
-    click_link "Sign out"
 
-    sign_in(provider: "Google")
+    logout(:user)
+    sign_in
+
     import_pomodoros(file)
 
     expect(page).to have_css(".pomodoros tr", count: 15)

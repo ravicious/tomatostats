@@ -40,23 +40,27 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+  config.include Warden::Test::Helpers
 
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
-    provider: 'facebook',
-    uid: '1365750696',
-    extra: {
-      raw_info: {
-        name: "Rafal Cieslak"
-      }
-    }
-  })
+  Warden.test_mode!
 
-  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: 'google_oauth2',
-    uid: '1312312365750696',
-    info: {
-      name: "John Legend"
-    }
-  })
+  config.after(:each) do
+    Warden.test_reset!
+  end
+
+  Capybara.javascript_driver = :webkit
 end
+
+# http://blog.plataformatec.com.br/2011/12/three-tips-to-improve-the-performance-of-your-test-suite/
+class ActiveRecord::Base
+  mattr_accessor :shared_connection
+  @@shared_connection = nil
+
+  def self.connection
+    @@shared_connection || retrieve_connection
+  end
+end
+
+# Forces all threads to share the same connection. This works on
+# # Capybara because it starts the web server in a thread.
+ActiveRecord::Base.shared_connection = ActiveRecord::Base.connection

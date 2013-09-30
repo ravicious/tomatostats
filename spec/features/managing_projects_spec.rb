@@ -16,17 +16,6 @@ feature "Managing Projects" do
     expect(current_path).to eq(root_path)
   end
 
-  scenario "Assigning pomodoros to a project" do
-    create_project name: "Twerking Hard"
-
-    check_first_three_pomodoros
-
-    select "Twerking Hard", from: "Project"
-    click_button "Assign"
-
-    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
-  end
-
   scenario "Projects index" do
     7.times {|n| create_project(name: "Project ##{n+1}") }
     click_link "Projects"
