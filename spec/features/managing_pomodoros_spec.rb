@@ -7,6 +7,17 @@ feature "Managing Pomodoros" do
     click_link "Pomodoros"
   end
 
+  scenario "Assigning pomodoros to a project" do
+    create_project name: "Twerking Hard"
+
+    check_first_three_pomodoros
+
+    select "Twerking Hard", from: "Project"
+    click_button "Assign"
+
+    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
+  end
+
 
   # context "using 24-hour clock format" do
   #   background { set_clock_format(24) }

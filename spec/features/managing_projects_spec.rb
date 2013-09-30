@@ -16,17 +16,6 @@ feature "Managing Projects" do
     expect(current_path).to eq(root_path)
   end
 
-  scenario "Assigning pomodoros to a project" do
-    create_project name: "Twerking Hard"
-
-    check_first_three_pomodoros
-
-    select "Twerking Hard", from: "Project"
-    click_button "Assign"
-
-    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
-  end
-
   scenario "Projects index" do
     7.times {|n| create_project(name: "Project ##{n+1}") }
     click_link "Projects"
@@ -90,12 +79,6 @@ feature "Managing Projects" do
       expect(page.all("li")[2]).to have_text("Project #3")
       expect(page.all("li")[3]).to have_text("Project #7")
       expect(page).not_to have_text("Project #1")
-    end
-  end
-
-  context "with JavaScript enabled", js: true do
-    scenario "Assigning pomodoros to a project" do
-      create_project name: "Twerking Hard"
     end
   end
 end
