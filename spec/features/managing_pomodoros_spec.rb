@@ -18,6 +18,21 @@ feature "Managing Pomodoros" do
     expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
   end
 
+  context "with JavaScript enabled", js: true do
+    scenario "Assigning pomodoros to a project" do
+      create_project name: "Twerking Hard"
+
+      visit pomodoros_path
+      page.execute_script("$('#calendar').fullCalendar('gotoDate', new Date(1379504450*1000))")
+      page.execute_script("$('#calendar').fullCalendar('select', new Date(1379504450*1000), new Date(1379522410*1000), false)")
+
+      select "Twerking Hard", from: "Project"
+      click_button "Assign"
+
+      page.execute_script("$('#calendar').fullCalendar('gotoDate', new Date(1379504450*1000))")
+      expect(page).to have_css('#calendar', text: "Twerking Hard")
+    end
+  end
 
   # context "using 24-hour clock format" do
   #   background { set_clock_format(24) }
