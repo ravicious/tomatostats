@@ -28,7 +28,9 @@ def assign_pomodoros_to_a_project(project: "Doesn't matter")
 end
 
 def create_project(name: "Doesn't matter")
-  visit '/' if current_path != "/"
+  js_only {
+    page.execute_script("$('.dropdown-toggle').eq(0).dropdown('toggle');")
+  }
   click_link "Add project"
   fill_in "Name", with: name
   click_button "Create Project"
