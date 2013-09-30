@@ -92,4 +92,10 @@ feature "Managing Projects" do
       expect(page).not_to have_text("Project #1")
     end
   end
+
+  context "with JavaScript enabled", js: true do
+    scenario "Assigning pomodoros to a project" do
+      create_project name: "Twerking Hard"
+    end
+  end
 end
