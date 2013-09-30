@@ -1,6 +1,7 @@
-def sign_in(provider: "Facebook")
-  visit '/'
-  click_link "with #{provider}"
+def sign_in
+  user = create(:user)
+  login_as user, scope: :user
+  visit root_path
 end
 
 def import_pomodoros(input)
