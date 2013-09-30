@@ -33,3 +33,11 @@ def create_project(name: "Doesn't matter")
   fill_in "Name", with: name
   click_button "Create Project"
 end
+
+def js_only(&block)
+  yield if using_javascript_driver?
+end
+
+def using_javascript_driver?
+  Capybara.current_driver == Capybara.javascript_driver
+end
