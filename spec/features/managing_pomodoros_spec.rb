@@ -18,7 +18,7 @@ feature "Managing Pomodoros" do
     expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
   end
 
-  context "with JavaScript enabled", js: true do
+  context "with JavaScript enabled", js: true, slow: true do
     scenario "Assigning pomodoros to a project" do
       create_project name: "Twerking Hard"
 
