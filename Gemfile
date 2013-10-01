@@ -17,8 +17,10 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'timecop'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
 end
+
+gem 'zeus', group: :test, require: false
 
 group :development do
   gem 'better_errors'

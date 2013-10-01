@@ -7,7 +7,7 @@ guard 'bundler' do
   # watch(/^.+\.gemspec/)
 end
 
-guard :rspec, cli: '--tag ~slow' do
+guard :rspec, zeus: true, bundler: false, cli: '--tag ~slow' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -29,7 +29,7 @@ guard :rspec, cli: '--tag ~slow' do
 end
 
 
-guard 'rails' do
+guard 'rails', zeus: true do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end
