@@ -36,10 +36,6 @@ class Pomodoro < ActiveRecord::Base
     )
   end
 
-  def self.sorted_by_started_at
-    order('started_at DESC')
-  end
-
   def self.done_weeks_ago(number_of)
     self.done_some_time_ago(number_of, 'week')
   end
