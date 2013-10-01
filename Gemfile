@@ -17,7 +17,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'timecop'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
 end
 
 group :development do
