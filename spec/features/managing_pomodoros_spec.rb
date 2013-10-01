@@ -18,6 +18,14 @@ feature "Managing Pomodoros" do
     expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
   end
 
+  scenario "Deleting pomodoros" do
+    check_first_three_pomodoros
+    click_button "Delete pomodoros"
+
+    expect(page).to have_text "3 pomodoros deleted."
+    expect(page).to have_css(".pomodoros tr", count: 12)
+  end
+
   context "with JavaScript enabled", js: true, slow: true do
     scenario "Assigning pomodoros to a project" do
       create_project name: "Twerking Hard"
@@ -31,6 +39,16 @@ feature "Managing Pomodoros" do
 
       FullCalendar.go_to_date 1379504450
       expect(page).to have_css(".fc-event-time", count: 5, text: "Twerking Hard")
+    end
+
+    scenario "Deleting pomodoros" do
+      FullCalendar.go_to_date 1379504450
+      FullCalendar.select 1379504450, 1379521410
+      click_button "Delete pomodoros"
+
+      FullCalendar.go_to_date 1379504450
+      expect(page).to have_text "4 pomodoros deleted."
+      expect(page).to have_css(".fc-event-time", count: 1)
     end
   end
 
@@ -62,14 +80,6 @@ feature "Managing Pomodoros" do
     expect(page).to have_text "5 pomodoros this week"
     expect(page).to have_text "10 pomodoros this month"
     expect(page).to have_text "15 pomodoros in overall"
-  end
-
-  scenario "Deleting pomodoros" do
-    check_first_three_pomodoros
-    click_button "Delete pomodoros"
-
-    expect(page).to have_text "3 pomodoros deleted."
-    expect(page).to have_css(".pomodoros tr", count: 12)
   end
 
   # context "with JavaScript enabled", js: true do
