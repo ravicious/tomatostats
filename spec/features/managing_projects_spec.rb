@@ -49,16 +49,17 @@ feature "Managing Projects" do
     expect(page).to have_content("My great project")
   end
 
-  scenario "Destroying a project" do
+  scenario "Destroying a project", js: true do
     create_project name: project_name
     assign_pomodoros_to_a_project project: project_name
 
     click_link "Projects"
-    within('.panel .projects') { click_link(project_name) }
+    click_link(project_name)
     click_link "Delete"
     visit pomodoros_path
 
-    within('.pomodoros') do
+    FullCalendar.go_to_date 1379504450
+    within('#calendar') do
       expect(page).not_to have_content(project_name)
     end
   end

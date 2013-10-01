@@ -7,49 +7,27 @@ feature "Managing Pomodoros" do
     click_link "Pomodoros"
   end
 
-  scenario "Assigning pomodoros to a project" do
+  scenario "Assigning pomodoros to a project", js: true do
     create_project name: "Twerking Hard"
 
-    check_first_three_pomodoros
+    visit pomodoros_path
+    FullCalendar.select 1379504450, 1379522410
 
     select "Twerking Hard", from: "Project"
     click_button "Assign"
 
-    expect(page).to have_css('.pomodoros .pomodoro', text: "Twerking Hard")
+    FullCalendar.go_to_date 1379504450
+    expect(page).to have_css(".fc-event-time", count: 5, text: "Twerking Hard")
   end
 
-  scenario "Deleting pomodoros" do
-    check_first_three_pomodoros
+  scenario "Deleting pomodoros", js: true do
+    FullCalendar.go_to_date 1379504450
+    FullCalendar.select 1379504450, 1379521410
     click_button "Delete pomodoros"
 
-    expect(page).to have_text "3 pomodoros deleted."
-    expect(page).to have_css(".pomodoros tr", count: 12)
-  end
-
-  context "with JavaScript enabled", js: true, slow: true do
-    scenario "Assigning pomodoros to a project" do
-      create_project name: "Twerking Hard"
-
-      visit pomodoros_path
-      FullCalendar.go_to_date 1379504450
-      FullCalendar.select 1379504450, 1379522410
-
-      select "Twerking Hard", from: "Project"
-      click_button "Assign"
-
-      FullCalendar.go_to_date 1379504450
-      expect(page).to have_css(".fc-event-time", count: 5, text: "Twerking Hard")
-    end
-
-    scenario "Deleting pomodoros" do
-      FullCalendar.go_to_date 1379504450
-      FullCalendar.select 1379504450, 1379521410
-      click_button "Delete pomodoros"
-
-      FullCalendar.go_to_date 1379504450
-      expect(page).to have_text "4 pomodoros deleted."
-      expect(page).to have_css(".fc-event-time", count: 1)
-    end
+    FullCalendar.go_to_date 1379504450
+    expect(page).to have_text "4 pomodoros deleted."
+    expect(page).to have_css(".fc-event-time", count: 1)
   end
 
   # context "using 24-hour clock format" do
