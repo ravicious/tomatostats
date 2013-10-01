@@ -12,17 +12,9 @@ def import_pomodoros(input)
   click_button "Submit"
 end
 
-def check_first_three_pomodoros
-  within '.pomodoros' do
-    3.times do |n|
-      find(:xpath, "(//input[@type='checkbox'])[#{n+1}]").set(true)
-    end
-  end
-end
-
 def assign_pomodoros_to_a_project(project: "Doesn't matter")
   visit pomodoros_path
-  check_first_three_pomodoros
+  FullCalendar.select 1379504450, 1379522410
   select project, from: "Project"
   click_button "Assign"
 end

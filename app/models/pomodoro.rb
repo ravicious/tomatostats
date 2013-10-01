@@ -17,8 +17,12 @@ class Pomodoro < ActiveRecord::Base
   end
 
   def self.time_filtered(args = {})
-    args[:started] = 0 if args[:started].blank?
-    args[:finished] = Time.current.to_i if args[:finished].blank?
+    # nullify args
+    # this is useful when there are empty params
+    # passed from a controller
+    args.each do |key, value|
+      args[key] = nil if value.blank?
+    end
 
     where("started_at >= ? and finished_at <= ?",
           args[:started], args[:finished])
@@ -30,14 +34,6 @@ class Pomodoro < ActiveRecord::Base
     ).select(
       "pomodoros.id, pomodoros.started_at, pomodoros.finished_at, projects.name as project_name"
     )
-  end
-
-  def self.for_html
-    includes(:project)
-  end
-
-  def self.sorted_by_started_at
-    order('started_at DESC')
   end
 
   def self.done_weeks_ago(number_of)
