@@ -8,7 +8,7 @@ class PomodorosController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html { self.pomodoros = pomodoros.for_html }
+      format.html
       format.json {
         self.pomodoros = pomodoros.for_json.time_filtered(
           started: params[:start],
@@ -44,20 +44,11 @@ class PomodorosController < ApplicationController
   end
 
   def find_multiple_pomodoros
-    # TODO: legacy code, delete old method (without start and end) later
-    if time_filtering_params_provided?
-      self.pomodoros = pomodoros.time_filtered(
-        started: params[:start],
-        finished: params[:end]
-      )
-    else
-      self.pomodoros = pomodoros.where(id: params[:pomodoros])
-    end
+    self.pomodoros = pomodoros.time_filtered(
+      started: params[:start],
+      finished: params[:end]
+    )
 
     @pomodoros_size = pomodoros.size
-  end
-
-  def time_filtering_params_provided?
-    !params[:start].blank? and !params[:end].blank?
   end
 end
