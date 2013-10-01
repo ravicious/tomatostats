@@ -20,6 +20,8 @@ group :development, :test do
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
 end
 
+gem 'zeus', group: :test, require: false
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
