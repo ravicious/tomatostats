@@ -30,7 +30,7 @@ feature "Managing Pomodoros" do
       click_button "Assign"
 
       FullCalendar.go_to_date 1379504450
-      expect(page).to have_css('#calendar', text: "Twerking Hard")
+      expect(page).to have_css(".fc-event-time", count: 5, text: "Twerking Hard")
     end
   end
 
