@@ -1,13 +1,28 @@
-.well
-  %h1 Your pomodoros
+.panel.panel-default
 
-  %ul.pomodoros
-    - pomodoros.each do |pomodoro|
-      %li
-        Pomodoro:
-        = pomodoro.duration[:diff]
+  .panel-heading
+    %h1.panel-title Pomodoros
 
-  %ul.stats
-    %li= "#{pomodoros.done_this_week.size} pomodoros this week"
-    %li= "#{pomodoros.done_this_month.size} pomodoros this month"
-    %li= "#{pomodoros.size} pomodoros in overall"
+  .panel-body
+    #calendar_wrapper
+      = form_tag pomodoros_path, method: :post,
+        class: 'form-inline pull-right', id: 'calendar-form' do
+        = hidden_field_tag 'start'
+        = hidden_field_tag 'end'
+
+        = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default',
+          name: 'delete_multiple', id: 'delete_multiple'
+
+        .form-group
+          %label.sr-only{for: 'project'} Project
+          = select_tag "Project", options_from_collection_for_select(projects, "id", "name"),
+            name: "project", class: 'form-control', prompt: 'Select a project'
+        = button_tag glyph('resize-small') + "Assign pomodoros",
+          class: 'btn btn-default', name: 'assign', id: 'assign'
+        = button_tag glyph('resize-full') + "Unassign pomodoros",
+          class: 'btn btn-default', name: 'assign', id: 'unassign'
+      .clearfix
+
+      #calendar
+
+= render 'stats_sidebar'

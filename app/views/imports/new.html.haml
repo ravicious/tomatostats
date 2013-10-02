@@ -1,4 +1,10 @@
-= simple_form_for :import, url: imports_path do |f|
-  = f.input :file, as: :file
-  = f.input :application, collection: ['Clockwork Tomato'], include_blank: false
-  = f.button :submit, "Submit"
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title Import pomodoros
+  .panel-body
+    = simple_form_for :import, url: imports_path do |f|
+      = f.input :file, as: :file
+      .row
+        .col-lg-3
+          = f.input :application, collection: ['Clockwork Tomato'], include_blank: false
+      = f.button :submit, "Submit", class: 'btn btn-default'

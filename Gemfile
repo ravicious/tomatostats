@@ -8,7 +8,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 group :development, :test do
@@ -18,7 +17,11 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'timecop'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
+
+gem 'zeus', group: :test, require: false
 
 group :development do
   gem 'better_errors'
@@ -32,8 +35,9 @@ end
 
 gem 'time_diff'
 gem 'haml-rails'
-gem 'simple_form'
-gem 'twitter-bootstrap-rails'
+gem 'simple_form', github: "plataformatec/simple_form"
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -41,3 +45,4 @@ gem 'omniauth-google-oauth2'
 gem 'figaro'
 gem 'high_voltage'
 gem 'decent_exposure'
+gem 'backbone-on-rails'

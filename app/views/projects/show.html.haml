@@ -1,0 +1,12 @@
+.panel.panel-default
+  .panel-heading
+    %h1.panel-title= project.name
+  .panel-body
+    .btn-group
+      = link_to "Edit", edit_project_path(project), class: 'btn btn-primary'
+      = link_to "Delete", project, method: :delete, class: 'btn btn-warning', data: { confirm: "Are you sure?" }
+    %h3 Stats
+    %ul
+      %li= "#{project.pomodoros.done_this_week.size} pomodoros this week"
+      %li= "#{project.pomodoros.done_this_month.size} pomodoros this month"
+      %li= "#{project.pomodoros.size} pomodoros in overall"

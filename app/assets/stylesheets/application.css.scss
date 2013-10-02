@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+@import "twitter/bootstrap";
+
+body { padding-top: 15px; }
+
+#calendar { margin-top: 1em; }

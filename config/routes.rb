@@ -13,8 +13,15 @@ Tomatostats::Application.routes.draw do
       :via => Devise.mappings[:user].sign_out_via
   end
 
-  resources :pomodoros, only: :index
-  resources :imports
+  resources :pomodoros, only: :index do
+    collection do
+      post 'delete_multiple'
+      post 'assign'
+      post 'unassign'
+    end
+  end
+  resources :imports, only: [:new, :create]
+  resources :projects
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

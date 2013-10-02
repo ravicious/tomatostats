@@ -10,36 +10,29 @@ feature "Importing Pomodoros" do
 
   context "from Clockwork Tomato" do
 
-    scenario "Importing pomodoros from an export file" do
-      click_link "Import pomodoros"
-
-      attach_file "File", file_with_old_pomodoros
-      select "Clockwork Tomato", from: "Application"
-      click_button "Submit"
-
-      expect(current_path).to eq(root_path)
-      expect(page).to have_css(".pomodoros li", count: 13)
-    end
-
-    scenario "Importing new pomodoros" do
+    scenario "Importing pomodoros from an export file", js: true do
       import_pomodoros(file_with_old_pomodoros)
       expect(page).to have_text("13 pomodoros imported.")
 
       import_pomodoros(file)
       expect(page).to have_text("2 pomodoros imported.")
-      expect(page).to have_css(".pomodoros li", count: 15)
+      expect(page).to have_text("15 pomodoros in overall")
+      FullCalendar.go_to_date 1379504450
+      expect(page).to have_css(".fc-event-time", count: 5)
     end
 
   end
 
-  scenario "Two users uploading pomodoros that were done in the same time" do
-    import_pomodoros(file)
-    click_link "Sign out"
-
-    sign_in(provider: "Google")
+  scenario "Two users uploading pomodoros that were done in the same time", js: true do
     import_pomodoros(file)
 
-    expect(page).to have_css(".pomodoros li", count: 15)
+    logout(:user)
+    sign_in
+
+    import_pomodoros(file)
+
+    FullCalendar.go_to_date 1379504450
+    expect(page).to have_css(".fc-event-time", count: 5)
   end
 
 end

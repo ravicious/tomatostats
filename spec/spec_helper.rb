@@ -2,7 +2,6 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'capybara/rails'
 require 'capybara/rspec'
 
@@ -26,7 +25,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -40,23 +39,23 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+  config.include Warden::Test::Helpers
 
-  OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
-    provider: 'facebook',
-    uid: '1365750696',
-    extra: {
-      raw_info: {
-        name: "Rafal Cieslak"
-      }
-    }
-  })
+  Warden.test_mode!
 
-  OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-    provider: 'google_oauth2',
-    uid: '1312312365750696',
-    info: {
-      name: "John Legend"
-    }
-  })
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    Warden.test_reset!
+    DatabaseCleaner.clean
+  end
+
+  Capybara.javascript_driver = :webkit
 end
