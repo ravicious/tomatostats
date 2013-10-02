@@ -4,7 +4,8 @@ window.Tomatostats =
   Views: {}
   Routers: {}
   initialize: ->
-    console.log("Hello from Backbone")
+    new Tomatostats.Routers.Calendar()
+    Backbone.history.start({pushState: true})
 
 $(document).ready ->
   Tomatostats.initialize()

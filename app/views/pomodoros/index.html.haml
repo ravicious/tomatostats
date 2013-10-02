@@ -4,17 +4,18 @@
     %h1.panel-title Pomodoros
 
   .panel-body
-    = form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'form-inline pull-right' do
-      = hidden_field_tag 'start'
-      = hidden_field_tag 'end'
-      = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default', name: 'delete_multiple', data: { confirm: "Are you sure?" }
-      .form-group
-        %label.sr-only{for: 'project'} Project
-        = select_tag "Project", options_from_collection_for_select(projects, "id", "name"),
-          name: "project", class: 'form-control', prompt: 'Select a project'
-      = button_tag glyph(:tags) + "Assign pomodoros", class: 'btn btn-default', name: 'assign'
-    .clearfix
+    #calendar_wrapper
+      = form_tag delete_multiple_or_assign_pomodoros_path, method: :post, class: 'form-inline pull-right' do
+        = hidden_field_tag 'start'
+        = hidden_field_tag 'end'
+        = button_tag glyph(:remove) + "Delete pomodoros", class: 'btn btn-default', name: 'delete_multiple', data: { confirm: "Are you sure?" }
+        .form-group
+          %label.sr-only{for: 'project'} Project
+          = select_tag "Project", options_from_collection_for_select(projects, "id", "name"),
+            name: "project", class: 'form-control', prompt: 'Select a project'
+        = button_tag glyph(:tags) + "Assign pomodoros", class: 'btn btn-default', name: 'assign'
+      .clearfix
 
-    #calendar
+      #calendar
 
 = render 'stats_sidebar'
