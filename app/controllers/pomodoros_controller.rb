@@ -32,8 +32,17 @@ class PomodorosController < ApplicationController
 
   def delete_multiple
     pomodoros.delete_all
-    flash[:success] = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} deleted."
-    redirect_to root_path
+    message = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} deleted."
+
+    respond_to do |format|
+      format.html {
+        flash[:success] = message
+        redirect_to root_path
+      }
+      format.json {
+        render json: { status: :ok, message: message }
+      }
+    end
   end
 
   def assign
