@@ -44,7 +44,7 @@ RSpec.configure do |config|
   Warden.test_mode!
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :deletion
     DatabaseCleaner.clean_with(:truncation)
   end
 
