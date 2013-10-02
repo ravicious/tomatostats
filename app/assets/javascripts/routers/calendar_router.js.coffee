@@ -1,6 +1,7 @@
 class Tomatostats.Routers.Calendar extends Backbone.Router
   routes:
     '': 'index'
+    '_=_': 'index'
     'pomodoros': 'index'
     'projects/:id': 'project_page'
 
