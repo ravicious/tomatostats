@@ -2,6 +2,7 @@ class Tomatostats.Views.Calendar extends Backbone.View
   events:
     'click #delete_multiple': 'deleteMultiple'
     'click #assign': 'assign'
+    'click #unassign': 'unassign'
   render: ->
     this.initializeCalendar(this.options.path)
     return this
@@ -34,6 +35,10 @@ class Tomatostats.Views.Calendar extends Backbone.View
   assign: (event) ->
     event.preventDefault()
     sendRequest('/pomodoros/assign.json')
+
+  unassign: (event) ->
+    event.preventDefault()
+    sendRequest('/pomodoros/unassign.json')
 
   dateToInteger = (date) ->
     return Math.round(date / 1000)
