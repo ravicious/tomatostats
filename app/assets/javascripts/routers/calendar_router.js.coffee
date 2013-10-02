@@ -6,7 +6,7 @@ class Tomatostats.Routers.Calendar extends Backbone.Router
 
   index: ->
     console.log('this is an index!')
-    calendar = new Tomatostats.Views.Calendar({path: '/pomodoros.json'})
+    calendar = new Tomatostats.Views.Calendar({path: '/pomodoros.json', el: '#calendar_wrapper'})
     calendar.render()
 
   project_page: (id) ->
