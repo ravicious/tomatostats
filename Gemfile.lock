@@ -72,6 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    database_cleaner (1.1.1)
     debug_inspector (0.0.2)
     decent_exposure (2.2.1)
     devise (3.0.2)
@@ -270,6 +271,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   coffee-rails (~> 4.0.0)
+  database_cleaner
   decent_exposure
   devise
   factory_girl_rails

@@ -18,6 +18,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 'timecop'
   gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 gem 'zeus', group: :test, require: false
