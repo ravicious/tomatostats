@@ -19,21 +19,9 @@ class PomodorosController < ApplicationController
     end
   end
 
-  # TODO: legacy code,
-  # delete after making assign and delete_multiple through ajax
-  def delete_multiple_or_assign
-    find_multiple_pomodoros
-    if params[:assign]
-      assign
-    elsif params[:delete_multiple]
-      delete_multiple
-    end
-  end
-
   def delete_multiple
     pomodoros.delete_all
     respond_with_success_to_formats("#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} deleted.")
-
   end
 
   def assign
