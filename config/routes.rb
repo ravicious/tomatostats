@@ -16,6 +16,8 @@ Tomatostats::Application.routes.draw do
   resources :pomodoros, only: :index do
     collection do
       post 'delete_multiple_or_assign'
+      post 'delete_multiple'
+      post 'assign'
     end
   end
   resources :imports, only: [:new, :create]
