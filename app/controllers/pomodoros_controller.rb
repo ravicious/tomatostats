@@ -39,9 +39,16 @@ class PomodorosController < ApplicationController
   def assign
     if project = projects.find_by_id(params[:project])
       pomodoros.update_all(project_id: project.id)
-      flash[:success] = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} assigned."
+
+      respond_with_success_to_formats(
+        "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} assigned."
+      )
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.json { render json: { message: "Project not found." }, status: 400 }
+      end
     end
-    redirect_to root_path
   end
 
   private
@@ -57,6 +64,7 @@ class PomodorosController < ApplicationController
       }
     end
   end
+
   def find_multiple_pomodoros
     self.pomodoros = pomodoros.time_filtered(
       started: params[:start],
