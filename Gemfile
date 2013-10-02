@@ -10,6 +10,8 @@ gem 'therubyracer', platforms: :ruby # See https://github.com/sstephenson/execjs
 gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
   gem 'capybara'
