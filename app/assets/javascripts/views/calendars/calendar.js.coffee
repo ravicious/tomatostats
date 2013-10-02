@@ -1,12 +1,4 @@
 class Tomatostats.Views.Calendar extends Backbone.View
-  el: '#calendar_wrapper'
-
-  initialize: ->
-    this.$('.btn').attr('disabled', true)
-
-  events:
-    "click .btn": "showAlert"
-    "change input": "changeButtons"
   render: ->
     this.initializeCalendar(this.options.path)
     return this
@@ -19,8 +11,8 @@ class Tomatostats.Views.Calendar extends Backbone.View
       firstHour: 8,
       events: path,
       select: (startDate, endDate) ->
-        $('#start').val(dateToInteger(startDate)).trigger('change')
-        $('#end').val(dateToInteger(endDate)).trigger('change')
+        $('#start').val(dateToInteger(startDate))
+        $('#end').val(dateToInteger(endDate))
       eventDataTransform: (eventData) ->
         {
           title: eventData.project_name || "w/o project",
@@ -29,12 +21,6 @@ class Tomatostats.Views.Calendar extends Backbone.View
           end: eventData.finished_at
         }
     })
-
-  changeButtons: (event) ->
-    if event.target.value == ""
-      this.$('.btn').attr('disabled', true)
-    else
-      this.$('.btn').removeAttr('disabled')
 
   showAlert: (event) ->
     event.preventDefault()
