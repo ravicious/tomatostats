@@ -1,6 +1,6 @@
 class PomodorosController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_multiple_pomodoros, only: :delete_multiple_or_assign
+  before_filter :find_multiple_pomodoros, only: [:delete_multiple, :assign]
   respond_to :html, :json
 
   expose(:pomodoros) { current_user.pomodoros }
@@ -19,27 +19,37 @@ class PomodorosController < ApplicationController
     end
   end
 
-  def delete_multiple_or_assign
-    if params[:assign]
-      assign
-    elsif params[:delete_multiple]
-      delete_multiple
-    end
-
-    redirect_to root_path
-  end
-
-  private
-
   def delete_multiple
     pomodoros.delete_all
-    flash[:success] = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} deleted."
+    respond_with_success_to_formats("#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} deleted.")
   end
 
   def assign
     if project = projects.find_by_id(params[:project])
       pomodoros.update_all(project_id: project.id)
-      flash[:success] = "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} assigned."
+
+      respond_with_success_to_formats(
+        "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} assigned."
+      )
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.json { render json: { message: "Project not found." }, status: 400 }
+      end
+    end
+  end
+
+  private
+
+  def respond_with_success_to_formats(message)
+    respond_to do |format|
+      format.html {
+        flash[:success] = message
+        redirect_to root_path
+      }
+      format.json {
+        render json: { status: :ok, message: message }
+      }
     end
   end
 
