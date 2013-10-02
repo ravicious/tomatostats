@@ -2,8 +2,7 @@ class Tomatostats.FlashMessage
   constructor: (@type, @message) ->
 
   render: ->
-    $('#flash-messages').append(this.template())
-    $('#flash-messages').find('.alert:last').slideDown()
+    $('#flash-messages').empty().append(this.template()).find('.alert').fadeIn()
 
   template: ->
     "<div style='display:none' class='alert alert-#{@type} alert-dismissable'>
