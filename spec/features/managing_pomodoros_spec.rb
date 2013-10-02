@@ -11,11 +11,12 @@ feature "Managing Pomodoros" do
     create_project name: "Twerking Hard"
 
     visit pomodoros_path
+    FullCalendar.go_to_date 1379504450
     FullCalendar.select 1379504450, 1379522410
-
     select "Twerking Hard", from: "Project"
-    click_button "Assign"
 
+    click_button "Assign"
+    expect(page).to have_text "5 pomodoros assigned."
     expect(page).to have_css(".fc-event-time", count: 5, text: "Twerking Hard")
   end
 
