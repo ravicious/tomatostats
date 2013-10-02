@@ -1,6 +1,6 @@
 class PomodorosController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_multiple_pomodoros, only: [:delete_multiple, :assign]
+  before_filter :find_multiple_pomodoros, only: [:delete_multiple, :assign, :unassign]
   respond_to :html, :json
 
   expose(:pomodoros) { current_user.pomodoros }
@@ -37,6 +37,13 @@ class PomodorosController < ApplicationController
         format.json { render json: { message: "Project not found." }, status: 400 }
       end
     end
+  end
+
+  def unassign
+    pomodoros.update_all(project_id: nil)
+    respond_with_success_to_formats(
+      "#{TextHelper.pluralize(@pomodoros_size, "pomodoro")} unassigned."
+    )
   end
 
   private
