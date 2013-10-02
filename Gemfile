@@ -17,7 +17,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'timecop'
-  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
 end
 
 gem 'zeus', group: :test, require: false

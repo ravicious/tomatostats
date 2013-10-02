@@ -17,6 +17,7 @@ Tomatostats::Application.routes.draw do
     collection do
       post 'delete_multiple'
       post 'assign'
+      post 'unassign'
     end
   end
   resources :imports, only: [:new, :create]

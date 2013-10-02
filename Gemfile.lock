@@ -14,14 +14,6 @@ GIT
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
 
-GIT
-  remote: git://github.com/thoughtbot/capybara-webkit.git
-  revision: e3a5dfdd4d081f8fbd8c3ee11cbc86d00b4e1a16
-  specs:
-    capybara-webkit (1.0.0)
-      capybara (~> 2.0, >= 2.0.2)
-      json
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -69,6 +61,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -77,6 +72,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    database_cleaner (1.1.1)
     debug_inspector (0.0.2)
     decent_exposure (2.2.1)
     devise (3.0.2)
@@ -273,8 +269,9 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   capybara
-  capybara-webkit!
+  capybara-webkit
   coffee-rails (~> 4.0.0)
+  database_cleaner
   decent_exposure
   devise
   factory_girl_rails

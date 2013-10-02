@@ -17,8 +17,10 @@
           %label.sr-only{for: 'project'} Project
           = select_tag "Project", options_from_collection_for_select(projects, "id", "name"),
             name: "project", class: 'form-control', prompt: 'Select a project'
-        = button_tag glyph(:tags) + "Assign pomodoros",
+        = button_tag glyph('resize-small') + "Assign pomodoros",
           class: 'btn btn-default', name: 'assign', id: 'assign'
+        = button_tag glyph('resize-full') + "Unassign pomodoros",
+          class: 'btn btn-default', name: 'assign', id: 'unassign'
       .clearfix
 
       #calendar
