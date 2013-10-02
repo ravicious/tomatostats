@@ -16,7 +16,6 @@ feature "Managing Pomodoros" do
     select "Twerking Hard", from: "Project"
     click_button "Assign"
 
-    FullCalendar.go_to_date 1379504450
     expect(page).to have_css(".fc-event-time", count: 5, text: "Twerking Hard")
   end
 
@@ -25,7 +24,6 @@ feature "Managing Pomodoros" do
     FullCalendar.select 1379504450, 1379521410
     click_button "Delete pomodoros"
 
-    FullCalendar.go_to_date 1379504450
     expect(page).to have_text "4 pomodoros deleted."
     expect(page).to have_css(".fc-event-time", count: 1)
   end
