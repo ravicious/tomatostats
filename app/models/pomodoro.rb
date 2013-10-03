@@ -36,6 +36,37 @@ class Pomodoro < ActiveRecord::Base
     )
   end
 
+  # TODO: clean this up
+  def self.stats
+    in_month = group("to_char(to_timestamp(started_at), 'YYYY-MM')").count.sort
+    in_week = group("to_char(to_timestamp(started_at), 'YYYY-MM-WW')").count.sort
+    in_day = group("to_char(to_timestamp(started_at), 'YYYY-MM-WW-DD')").count.sort
+
+    stats = {}
+    stats['count'] = in_month.flatten.reject {|obj| !obj.is_a?(Integer)}.sum
+    stats['months'] = {}
+
+    in_month.each do |key, value|
+      stats['months'][key] = { 'weeks' => {}, 'count' => value }
+    end
+
+    in_week.each do |key, value|
+      month = key.match(/[0-9]{4}-[0-9]{2}/).to_s
+
+      stats['months'][month]['weeks'][key] = { 'days' => {}, 'count' => value }
+    end
+
+    in_day.each do |key, value|
+      month = key.match(/[0-9]{4}-[0-9]{2}/).to_s
+      week = key.match(/[0-9]{4}-[0-9]{2}-[0-9]{1,2}/).to_s
+      day = key.match(/[0-9]{2}$/).to_s
+
+      stats['months'][month]['weeks'][week]['days']["#{month}-#{day}"] = { 'count' => value }
+    end
+
+    stats
+  end
+
   def self.done_weeks_ago(number_of)
     self.done_some_time_ago(number_of, 'week')
   end
