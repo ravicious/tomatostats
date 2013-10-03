@@ -39,8 +39,8 @@ class Pomodoro < ActiveRecord::Base
   # TODO: clean this up
   def self.stats
     in_month = group("to_char(to_timestamp(started_at), 'YYYY-MM')").count.sort
-    in_week = group("to_char(to_timestamp(started_at), 'YYYY-MM-WW')").count.sort
-    in_day = group("to_char(to_timestamp(started_at), 'YYYY-MM-WW-DD')").count.sort
+    in_week = group("to_char(to_timestamp(started_at), 'YYYY-MM-W')").count.sort
+    in_day = group("to_char(to_timestamp(started_at), 'YYYY-MM-W-DD')").count.sort
 
     stats = {}
     stats['count'] = in_month.flatten.reject {|obj| !obj.is_a?(Integer)}.sum

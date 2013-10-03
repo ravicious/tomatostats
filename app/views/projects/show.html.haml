@@ -5,3 +5,50 @@
     .btn-group
       = link_to glyph(:pencil) + "Edit", edit_project_path(project), class: 'btn btn-default'
       = link_to glyph(:remove) + "Delete", project, method: :delete, class: 'btn btn-default', data: { confirm: "Are you sure?" }
+    %h3 Overall breakdown
+
+    .row
+      - stats['months'].each do |month, month_values|
+        .col-md-3
+          .panel.panel-default
+            .panel-heading
+              %h5.panel-title= Date.parse("#{month}-01").to_s(:month_and_year)
+            .panel-body
+              .progress
+                .progress-bar{style: "width: #{(month_values['count'].to_f / stats['count'])*100}%"}
+              %p
+                = "#{pluralize(month_values['count'], "pomodoro")} done."
+              %p.text-muted
+                = surround '(', ')' do
+                  = number_to_percentage (month_values['count'].to_f / stats['count'])*100, precision: 0
+                  = "of all #{pluralize(stats['count'], "pomodoro")}"
+
+    %h3 Monthly breakdown
+
+    - stats['months'].each do |month, month_values|
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= Date.parse("#{month}-01").to_s(:month_and_year)
+        .panel-body
+          %p
+            = "#{pluralize(month_values['count'], "pomodoro")} done."
+            %span.text-muted
+              = surround '(', ')' do
+                = number_to_percentage (month_values['count'].to_f / stats['count'])*100, precision: 0
+                = "of all #{pluralize(stats['count'], "pomodoro")}"
+          - month_values['weeks'].each do |week, week_values, i|
+            .col-md-3
+              .panel.panel-default
+                .panel-heading
+                  - start_date = Date.parse(week_values['days'].keys.first)
+                  - end_date = Date.parse(week_values['days'].keys.last)
+                  %h5.panel-title= "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
+                .panel-body
+                  .progress
+                    .progress-bar{style: "width: #{(week_values['count'].to_f / month_values['count'])*100}%"}
+                  %p
+                    = "#{pluralize(week_values['count'], "pomodoro")} done."
+                  %p.text-muted
+                    = surround '(', ')' do
+                      = number_to_percentage (week_values['count'].to_f / month_values['count'])*100, precision: 0
+                      = "of #{pluralize(month_values['count'], "pomodoro")}"
