@@ -3,5 +3,5 @@
     %h1.panel-title= project.name
   .panel-body
     .btn-group
-      = link_to "Edit", edit_project_path(project), class: 'btn btn-primary'
-      = link_to "Delete", project, method: :delete, class: 'btn btn-warning', data: { confirm: "Are you sure?" }
+      = link_to glyph(:pencil) + "Edit", edit_project_path(project), class: 'btn btn-default'
+      = link_to glyph(:remove) + "Delete", project, method: :delete, class: 'btn btn-default', data: { confirm: "Are you sure?" }
