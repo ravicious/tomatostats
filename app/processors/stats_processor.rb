@@ -51,8 +51,8 @@ module StatsProcessor
     attr_accessor :date, :count
 
     def initialize(date, count)
-      @date = date
-      @count = count
+      self.date = date
+      self.count = count
     end
   end
 
@@ -79,5 +79,10 @@ module StatsProcessor
   end
 
   class Day < DateUnit
+    def date=(new_date)
+      new_date = new_date.split('-')
+      new_date.delete_at(2)
+      @date = new_date.join('-')
+    end
   end
 end
