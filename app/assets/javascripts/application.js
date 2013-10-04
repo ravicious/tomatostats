@@ -19,4 +19,5 @@
 //= require tomatostats
 //= require_tree ./views
 //= require_tree ./routers
+//= require_tree ./helpers
 //= require_tree .

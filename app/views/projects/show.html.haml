@@ -1,12 +1,36 @@
-.panel.panel-default
-  .panel-heading
-    %h1.panel-title= project.name
+#project.panel.panel-default
   .panel-body
+    .page-header
+      %h1
+        = project.name
+        %small
+          = surround '(', ')' do
+            = pomodoros_count stats['count']
+            in overall
+
     .btn-group
-      = link_to "Edit", edit_project_path(project), class: 'btn btn-primary'
-      = link_to "Delete", project, method: :delete, class: 'btn btn-warning', data: { confirm: "Are you sure?" }
-    %h3 Stats
-    %ul
-      %li= "#{project.pomodoros.done_this_week.size} pomodoros this week"
-      %li= "#{project.pomodoros.done_this_month.size} pomodoros this month"
-      %li= "#{project.pomodoros.size} pomodoros in overall"
+      = link_to glyph(:transfer) + "Toggle Views", '', class: 'btn btn-default', id: 'toggle_views'
+      = link_to glyph(:pencil) + "Edit", edit_project_path(project), class: 'btn btn-default'
+      = link_to glyph(:remove) + "Delete", project, method: :delete, class: 'btn btn-default', data: { confirm: "Are you sure?" }
+
+    %h3 Monthly breakdown
+
+    .row
+      - stats['months'].each do |month, month_values|
+        = render partial: 'stats_panel',
+          locals: { title: Date.parse("#{month}-01").to_s(:month_and_year),
+          part_count: month_values['count'],
+          total_count: stats['count'] }
+
+    %h3 Weekly breakdown
+
+    - stats['months'].each do |month, month_values|
+      .panel.panel-default
+        .panel-heading
+          %h4.panel-title= Date.parse("#{month}-01").to_s(:month_and_year)
+        .panel-body
+          - month_values['weeks'].each do |week, week_values|
+            = render partial: 'stats_panel',
+              locals: { title: days_range(week_values['days'].keys.first, week_values['days'].keys.last),
+              part_count: week_values['count'],
+              total_count: month_values['count'] }
