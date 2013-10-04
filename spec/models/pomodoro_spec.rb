@@ -28,21 +28,16 @@ describe Pomodoro do
 
     subject { Pomodoro.stats }
 
-    it "calculates total number of pomodoros" do
+    # four `expects` in one `it` in order to speed up tests
+    it "calculates total number of pomodoos and makes one group per date range" do
       expect(subject['count']).to eq(90)
-    end
 
-    it "makes one group per month" do
       expect(subject['months']).to have(3).groups
-    end
 
-    it "makes one group per week" do
       subject['months'].each_value do |month|
         expect(month['weeks']).to have_at_least(4).groups
       end
-    end
 
-    it "makes one group per day" do
       subject['months'].each_value do |month|
         month['weeks'].each_value do |week|
           expect(week['days']).to have_at_least(1).group
