@@ -9,6 +9,7 @@
             in overall
 
     .btn-group
+      = link_to glyph(:transfer) + "Toggle Views", '', class: 'btn btn-default', id: 'toggle_views'
       = link_to glyph(:pencil) + "Edit", edit_project_path(project), class: 'btn btn-default'
       = link_to glyph(:remove) + "Delete", project, method: :delete, class: 'btn btn-default', data: { confirm: "Are you sure?" }
 
