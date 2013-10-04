@@ -29,7 +29,7 @@ describe Pomodoro do
     subject { Pomodoro.stats }
 
     # four `expects` in one `it` in order to speed up tests
-    it "calculates total number of pomodoos and makes one group per date range" do
+    it "calculates total number of pomodoros and makes one group per date range" do
       expect(subject['count']).to eq(90)
 
       expect(subject['months']).to have(3).groups
