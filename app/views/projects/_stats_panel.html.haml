@@ -1,0 +1,12 @@
+.col-md-3
+  .panel.panel-default
+    .panel-heading= title
+    .panel-body
+      .progress
+        .progress-bar{style: "width: #{(part_count.to_f / total_count)*100}%"}
+      %p
+        = pomodoros_count(part_count) + " done."
+      %p.text-muted
+        = surround '(', ')' do
+          = number_to_percentage (part_count.to_f / total_count)*100, precision: 0
+          = "of #{pomodoros_count(total_count)}".html_safe

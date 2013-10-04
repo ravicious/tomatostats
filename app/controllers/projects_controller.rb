@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
 
   expose(:projects) { current_user.projects.sorted_by_name.includes(:pomodoros) }
   expose(:project, attributes: :project_params)
+  expose(:stats) { project.pomodoros.stats }
 
   def show
     project.touch
