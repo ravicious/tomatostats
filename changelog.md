@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.2
+
+* rewritten stats parsing system
+
 ## v0.2.1
 
 * new relic
