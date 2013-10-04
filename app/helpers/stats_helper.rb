@@ -6,7 +6,7 @@ module StatsHelper
   end
 
   def pomodoros_count(count)
-    content_tag(:span, class: 'pomodoros-count') do
+    content_tag(:span, class: 'pomodoros-count', data: {count: count, format: 'pomodoros'}) do
       pluralize(count, "pomodoro")
     end
   end
