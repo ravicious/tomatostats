@@ -1,11 +1,13 @@
 .panel.panel-default
-  .panel-heading
-    %h1.panel-title= project.name
   .panel-body
+    .page-header
+      %h1
+        = project.name
+        %small= "(#{pluralize(stats['count'], "pomodoro")} in overall)"
     .btn-group
       = link_to glyph(:pencil) + "Edit", edit_project_path(project), class: 'btn btn-default'
       = link_to glyph(:remove) + "Delete", project, method: :delete, class: 'btn btn-default', data: { confirm: "Are you sure?" }
-    %h3 Overall breakdown
+    %h3 Monthly breakdown
 
     .row
       - stats['months'].each do |month, month_values|
@@ -21,21 +23,15 @@
               %p.text-muted
                 = surround '(', ')' do
                   = number_to_percentage (month_values['count'].to_f / stats['count'])*100, precision: 0
-                  = "of all #{pluralize(stats['count'], "pomodoro")}"
+                  = "of #{pluralize(stats['count'], "pomodoro")}"
 
-    %h3 Monthly breakdown
+    %h3 Weekly breakdown
 
     - stats['months'].each do |month, month_values|
       .panel.panel-default
         .panel-heading
           %h4.panel-title= Date.parse("#{month}-01").to_s(:month_and_year)
         .panel-body
-          %p
-            = "#{pluralize(month_values['count'], "pomodoro")} done."
-            %span.text-muted
-              = surround '(', ')' do
-                = number_to_percentage (month_values['count'].to_f / stats['count'])*100, precision: 0
-                = "of all #{pluralize(stats['count'], "pomodoro")}"
           - month_values['weeks'].each do |week, week_values, i|
             .col-md-3
               .panel.panel-default
