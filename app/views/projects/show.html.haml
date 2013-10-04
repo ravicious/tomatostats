@@ -3,7 +3,10 @@
     .page-header
       %h1
         = project.name
-        %small= "(#{pluralize(stats['count'], "pomodoro")} in overall)"
+        %small
+          = surround '(', ')' do
+            = pomodoros_count stats['count']
+            in overall
 
     .btn-group
       = link_to glyph(:pencil) + "Edit", edit_project_path(project), class: 'btn btn-default'
