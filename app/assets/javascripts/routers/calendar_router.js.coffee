@@ -11,4 +11,4 @@ class Tomatostats.Routers.Calendar extends Backbone.Router
     calendar.render()
 
   project_page: (id) ->
-    console.log("This is project #{id}")
+    project = new Tomatostats.Views.Project({el: '#project'})
