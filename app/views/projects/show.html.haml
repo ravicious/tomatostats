@@ -36,9 +36,7 @@
             .col-md-3
               .panel.panel-default
                 .panel-heading
-                  - start_date = Date.parse(week_values['days'].keys.first)
-                  - end_date = Date.parse(week_values['days'].keys.last)
-                  %h5.panel-title= "#{start_date.to_s(:short)} - #{end_date.to_s(:short)}"
+                  %h5.panel-title= days_range(week_values['days'].keys.first, week_values['days'].keys.last)
                 .panel-body
                   .progress
                     .progress-bar{style: "width: #{(week_values['count'].to_f / month_values['count'])*100}%"}
