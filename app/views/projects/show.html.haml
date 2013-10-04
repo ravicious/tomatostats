@@ -5,7 +5,7 @@
         = project.name
         %small
           = surround '(', ')' do
-            = pomodoros_count stats['count']
+            = pomodoros_count stats.count
             in overall
 
     .btn-group
@@ -16,21 +16,21 @@
     %h3 Monthly breakdown
 
     .row
-      - stats['months'].each do |month, month_values|
+      - stats.months.each do |month|
         = render partial: 'stats_panel',
-          locals: { title: Date.parse("#{month}-01").to_s(:month_and_year),
-          part_count: month_values['count'],
-          total_count: stats['count'] }
+          locals: { title: Date.parse("#{month.date}-01").to_s(:month_and_year),
+          part_count: month.count,
+          total_count: stats.count }
 
     %h3 Weekly breakdown
 
-    - stats['months'].each do |month, month_values|
+    - stats.months.each do |month|
       .panel.panel-default
         .panel-heading
-          %h4.panel-title= Date.parse("#{month}-01").to_s(:month_and_year)
+          %h4.panel-title= Date.parse("#{month.date}-01").to_s(:month_and_year)
         .panel-body
-          - month_values['weeks'].each do |week, week_values|
+          - month.weeks.each do |week|
             = render partial: 'stats_panel',
-              locals: { title: days_range(week_values['days'].keys.first, week_values['days'].keys.last),
-              part_count: week_values['count'],
-              total_count: month_values['count'] }
+              locals: { title: days_range(week.days.first.date, week.days.last.date),
+              part_count: week.count,
+              total_count: month.count }
