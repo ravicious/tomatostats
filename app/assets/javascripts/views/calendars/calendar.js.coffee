@@ -14,6 +14,11 @@ class Tomatostats.Views.Calendar extends Backbone.View
       allDaySlot: false,
       unselectAuto: false,
       firstHour: 8,
+      firstDay: 1,
+      timeFormat: 'H:mm',
+      axisFormat: 'H:mm',
+      columnFormat:
+        week: 'dddd d.M'
       events: path,
       select: (startDate, endDate) ->
         $('#start').val(dateToInteger(startDate))
