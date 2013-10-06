@@ -29,6 +29,16 @@
         .panel-heading
           %h4.panel-title= Date.parse("#{month.date}-01").to_s(:month_and_year)
         .panel-body
+          .col-md-3
+            .panel.panel-default
+              .panel-heading Calendar overview
+              .panel-body
+                .tiny-calendar{data: { date: month.date + "-01" } }
+                  .events
+                    - month.weeks.each do |week|
+                      .event
+                        .start= week.days.first.date
+                        .end= week.days.last.date
           - month.weeks.each do |week|
             = render partial: 'stats_panel',
               locals: { title: days_range(week.days.first.date, week.days.last.date),
