@@ -38,8 +38,8 @@ class Pomodoro < ActiveRecord::Base
 
   def self.stats
     raw_months = group("to_char(to_timestamp(started_at), 'YYYY-MM')").count.sort
-    raw_weeks = group("to_char(to_timestamp(started_at), 'YYYY-MM-W')").count.sort
-    raw_days = group("to_char(to_timestamp(started_at), 'YYYY-MM-W-DD')").count.sort
+    raw_weeks = group("to_char(to_timestamp(started_at), 'YYYY-MM-IW')").count.sort
+    raw_days = group("to_char(to_timestamp(started_at), 'YYYY-MM-IW-DD')").count.sort
 
     stats = StatsProcessor::Stats.new(raw_months, raw_weeks, raw_days).parse
   end
