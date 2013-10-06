@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.3
+
+* better date displaying in calendar
+* added tiny calendars in project pages
+* fixed tooltips
+
 ## v0.2.2
 
 * rewritten stats parsing system
