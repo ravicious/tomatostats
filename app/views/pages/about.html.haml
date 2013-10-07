@@ -1,6 +1,51 @@
 .jumbotron
-  .container
-    %h1 Beautiful stats for your pomodoros
+  %h1 Beautiful stats for your pomodoros
 
-    %p TomatoStats takes care of your pomodoros and display stats in a beautiful way!
-    %p Sign in, import some pomodoros and check out the stats!
+  .row
+    .col-md-6
+      %p TomatoStats takes care of your pomodoros and display stats in a beautiful way! Sign in, import some pomodoros and check them out!
+      %p
+        Don't have any pomodoros? There's no need to be sad. Just
+        = link_to "go grab some", example_file_imports_path
+        and have fun!
+
+    .col-md-6
+      %p
+        Currently we support data exported from
+        = succeed "." do
+          %a{href: "https://play.google.com/store/apps/details?id=net.phlam.android.clockworktomato"} Clockwork Tomato
+        If you know any other pomodoro app that lets you export its data,
+        = succeed "!" do
+          %a{href: "https://github.com/ravicious/tomatostats/issues"} message us
+
+  #screenshots.carousel.slide{data: { interval: 5000 }}
+    %ol.carousel-indicators
+      %li.active{data: { target: "#screenshots", 'slide-to' => 0 }}
+      %li{data: { target: "#screenshots", 'slide-to' => 1 }}
+      %li{data: { target: "#screenshots", 'slide-to' => 2 }}
+      %li{data: { target: "#screenshots", 'slide-to' => 3 }}
+
+    .carousel-inner
+      .item.active
+        = image_tag 'carousel/1.png'
+        .carousel-caption
+          %h3 Assign pomodoros to projects!
+      .item
+        = image_tag 'carousel/2.png'
+        .carousel-caption
+          %h3 Analyze our clean and helpful statistics!
+      .item
+        = image_tag 'carousel/3.png'
+        .carousel-caption
+          %h3 See your performance per week!
+      .item
+        = image_tag 'carousel/4.png'
+        .carousel-caption
+          %h3 Instantly toggle between pomodoros and hours view!
+
+    %a.left.carousel-control{href: "#screenshots", data: { slide: 'prev' }}
+      %span.icon-prev
+    %a.right.carousel-control{href: "#screenshots", data: { slide: 'next' }}
+      %span.icon-next
+  :javascript
+    $('#screenshots').carousel();

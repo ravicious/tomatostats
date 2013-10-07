@@ -1,5 +1,5 @@
 class ImportsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: :example_file
   before_filter :initialize_importer, only: :create
 
   def new
@@ -17,10 +17,16 @@ class ImportsController < ApplicationController
     redirect_to root_path
   end
 
+  def example_file
+    example = ExampleFilePrinter.new
+    example.past_days(14)
+    send_data example.to_csv, type: :csv, filename: "example_pomodoros.csv"
+  end
+
   private
 
   def initialize_importer
-    file = params[:import][:file].path
+    file = params[:import][:file].tempfile
     @importer = Importer.importers[params[:import][:application]].new(input: file, user: current_user)
   end
 end

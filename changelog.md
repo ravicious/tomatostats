@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0
+
+* completely new front page
+* ability to download an example file with pomodoros
+* fixed grouping pomodoros by week
+
 ## v0.2.3
 
 * better date displaying in calendar

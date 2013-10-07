@@ -20,7 +20,12 @@ Tomatostats::Application.routes.draw do
       post 'unassign'
     end
   end
-  resources :imports, only: [:new, :create]
+  resources :imports, only: [:new, :create] do
+    collection do
+      get 'example_file'
+    end
+  end
+
   resources :projects
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

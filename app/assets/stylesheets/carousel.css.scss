@@ -1,0 +1,17 @@
+.carousel {
+  max-width: 1020px;
+  max-height: 640px;
+  margin: 15px 0;
+
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.65);
+  }
+
+  .carousel-control.left {
+    background-image: linear-gradient(to right, rgba(0,0,0,0.2) 0%, transparent 100%);
+  }
+
+  .carousel-control.right {
+    background-image: linear-gradient(to left, rgba(0,0,0,0.2) 0%, transparent 100%);
+  }
+}
