@@ -1,9 +1,10 @@
 class Importer
 
   attr_reader :imported_pomodoros
+  attr_accessor :input
 
   def initialize(args = {})
-    @input = args[:input]
+    self.input = args[:input]
     @user = args[:user]
     @imported_pomodoros = []
   end

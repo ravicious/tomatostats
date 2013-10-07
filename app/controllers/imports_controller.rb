@@ -20,7 +20,7 @@ class ImportsController < ApplicationController
   private
 
   def initialize_importer
-    file = params[:import][:file].path
+    file = params[:import][:file].tempfile
     @importer = Importer.importers[params[:import][:application]].new(input: file, user: current_user)
   end
 end
