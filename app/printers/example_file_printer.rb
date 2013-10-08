@@ -2,7 +2,7 @@ class ExampleFilePrinter
 
   attr_reader :pomodoros
 
-  def initialize()
+  def initialize
     @pomodoros = []
   end
 

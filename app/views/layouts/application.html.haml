@@ -19,7 +19,7 @@
       = render 'layouts/navbar'
 
       .row
-        %div{class: "col-md-12"}
+        %div.col-md-12
           #flash-messages
             - flash.each do |key, value|
               %div{class: [flash_class(key), 'alert-dismissable']}

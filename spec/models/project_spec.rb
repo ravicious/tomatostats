@@ -25,4 +25,25 @@ describe Project do
       end
     end
   end
+
+  describe ".sorted_by_activity" do
+    before do
+      7.times { |n| create(:project, name: "Project ##{n+1}") }
+      Project.first.touch
+      Project.last.touch
+    end
+
+    subject { Project.sorted_by_activity.load }
+
+    it "sorts projects by activity" do
+      expect(subject.first).to eq(Project.last)
+      expect(subject.second).to eq(Project.first)
+      expect(subject).not_to include(Project.where(name: "Project #2"))
+      expect(subject).not_to include(Project.where(name: "Project #3"))
+    end
+
+    it "returns five projects" do
+      expect(subject).to have(5).projects
+    end
+  end
 end
