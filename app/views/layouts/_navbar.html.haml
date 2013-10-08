@@ -16,7 +16,7 @@
             Projects
             %b.caret
           %ul.dropdown-menu.projects
-            - current_user.projects.reorder('updated_at DESC').limit(5).each do |project|
+            - current_user.projects.sorted_by_activity.each do |project|
               %li= link_to project, project
             %li.divider
             %li= link_to "All projects", projects_path
@@ -26,7 +26,6 @@
       - if user_signed_in?
         %li.dropdown
           %a.dropdown-toggle{href: "#", data: { toggle: 'dropdown' }}
-            -# = image_tag(current_user.avatar_url(25), class: 'avatar')
             = current_user
             %b.caret
           %ul.dropdown-menu

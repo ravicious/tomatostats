@@ -3,6 +3,7 @@ require "spec_helper"
 feature "Importing Pomodoros" do
   let(:file) { "#{Rails.root}/spec/support/clockwork_tomato.csv" }
   let(:file_with_old_pomodoros) { "#{Rails.root}/spec/support/clockwork_tomato_old.csv" }
+  let(:too_big_file) { "#{Rails.root}/spec/support/clockwork_tomato_too_big.csv" }
 
   background do
     sign_in
@@ -16,9 +17,13 @@ feature "Importing Pomodoros" do
 
       import_pomodoros(file)
       expect(page).to have_text("2 pomodoros imported.")
-      expect(page).to have_text("15 pomodoros in overall")
       FullCalendar.go_to_date 1379504450
       expect(page).to have_css(".fc-event-time", count: 5)
+    end
+
+    scenario "Importing too big file" do
+      import_pomodoros(too_big_file)
+      expect(page).to have_text("File size is too big")
     end
 
   end

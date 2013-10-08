@@ -1,11 +1,12 @@
 class Importer
 
   attr_reader :imported_pomodoros
-  attr_accessor :input
+  attr_accessor :input, :errors
 
   def initialize(args = {})
     self.input = args[:input]
     @user = args[:user]
+    @errors = []
     @imported_pomodoros = []
   end
 
@@ -18,7 +19,12 @@ class Importer
   end
 
   def import
-    custom_import
+    custom_import if valid?
+  end
+
+  def valid?
+    validate
+    !errors.any?
   end
 
   private
@@ -28,6 +34,9 @@ class Importer
     if pomodoro.new_record?
       @imported_pomodoros.push(pomodoro) if pomodoro.save
     end
+  end
+
+  def validate
   end
 
 end

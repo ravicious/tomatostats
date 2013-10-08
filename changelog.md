@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.3.1
+
+* import file size validation
+* refactored a lot of code
+
 ## v0.3.0
 
 * completely new front page
