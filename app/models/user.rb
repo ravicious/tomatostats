@@ -24,21 +24,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def avatar_url(height=180)
-    send("#{provider}_avatar_url", height)
-  end
-
   def to_s
     name
-  end
-
-  private
-
-  def facebook_avatar_url(height)
-    "http://graph.facebook.com/#{uid}/picture?type=square&height=#{height}"
-  end
-
-  def google_oauth2_avatar_url(height)
-    "https://profiles.google.com/s2/photos/profile/#{uid}?sz=#{height}"
   end
 end
