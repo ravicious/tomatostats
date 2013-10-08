@@ -26,7 +26,6 @@
       - if user_signed_in?
         %li.dropdown
           %a.dropdown-toggle{href: "#", data: { toggle: 'dropdown' }}
-            -# = image_tag(current_user.avatar_url(25), class: 'avatar')
             = current_user
             %b.caret
           %ul.dropdown-menu
