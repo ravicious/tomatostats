@@ -17,23 +17,13 @@ feature "Managing Projects" do
   end
 
   scenario "Projects index" do
-    7.times {|n| create_project(name: "Project ##{n+1}") }
+    2.times {|n| create_project(name: "Project ##{n+1}") }
     click_link "Projects"
 
     within('.panel .projects') do
-      7.times do |n|
+      2.times do |n|
         expect(page).to have_text("Project ##{n+1}")
       end
-    end
-  end
-
-  scenario "Project page" do
-    create_project name: project_name
-    click_link "Projects"
-    within('.panel') do
-      click_link project_name
-
-      expect(page).to have_text(project_name)
     end
   end
 
