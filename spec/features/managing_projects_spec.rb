@@ -1,7 +1,7 @@
 require "spec_helper"
 
 feature "Managing Projects" do
-  let(:project_name) { "Awesome project, great job!" }
+  let(:project_name) { "Awesome project" }
   background do
     sign_in
     import_pomodoros("#{Rails.root}/spec/support/clockwork_tomato.csv")
