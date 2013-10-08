@@ -9,10 +9,10 @@ feature "Managing Projects" do
 
   scenario "Creating a project" do
     click_link "Add project"
-    fill_in "Name", with: "Awesome Project"
+    fill_in "Name", with: project_name
     click_button "Create Project"
 
-    expect(page).to have_text("Awesome Project")
+    expect(page).to have_text(project_name)
     expect(current_path).to eq(root_path)
   end
 
@@ -28,9 +28,9 @@ feature "Managing Projects" do
   end
 
   scenario "Editing a project" do
-    create_project name: "My awesome project"
+    create_project name: project_name
     click_link "Projects"
-    within('.panel .projects') { click_link "My awesome project" }
+    within('.panel .projects') { click_link project_name }
     click_link "Edit"
 
     fill_in "Name", with: "My great project"
