@@ -17,10 +17,10 @@
 
     .row
       - stats.months.each do |month|
-        = render partial: 'stats_panel',
-          locals: { title: Date.parse("#{month.date}-01").to_s(:month_and_year),
+        = render 'stats_panel',
+          title: Date.parse("#{month.date}-01").to_s(:month_and_year),
           part_count: month.count,
-          total_count: stats.count }
+          total_count: stats.count
 
     %h3 Weekly breakdown
 
@@ -29,10 +29,9 @@
         .panel-heading
           %h4.panel-title= Date.parse("#{month.date}-01").to_s(:month_and_year)
         .panel-body
-          = render partial: 'calendar_overview',
-            locals: { month: month }
+          = render 'calendar_overview', month: month
           - month.weeks.each do |week|
-            = render partial: 'stats_panel',
-              locals: { title: days_range(week.days.first.date, week.days.last.date),
+            = render 'stats_panel',
+              title: days_range(week.days.first.date, week.days.last.date),
               part_count: week.count,
-              total_count: month.count }
+              total_count: month.count
