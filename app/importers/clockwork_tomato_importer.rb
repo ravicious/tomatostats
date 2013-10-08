@@ -2,11 +2,6 @@ require 'csv'
 
 class ClockworkTomatoImporter < Importer
 
-  def self.input(new_input)
-    new_input = new_input.to_path if new_input.respond_to?(:to_path)
-    @input = new_input.to_str
-  end
-
   private
 
   def custom_import
