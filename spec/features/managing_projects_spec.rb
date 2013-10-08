@@ -63,23 +63,4 @@ feature "Managing Projects" do
       expect(page).not_to have_content(project_name)
     end
   end
-
-  scenario "Sorting projects by activity" do
-    7.times {|n| create_project(name: "Project ##{n+1}") }
-    click_link "Projects"
-    within('.panel .projects') { click_link "Project #3" }
-    click_link "Projects"
-    within('.panel .projects') { click_link "Project #5" }
-    click_link "Projects"
-    within('.panel .projects') { click_link "Project #2" }
-    click_link "Projects"
-
-    within '.nav .projects' do
-      expect(page.all("li")[0]).to have_text("Project #2")
-      expect(page.all("li")[1]).to have_text("Project #5")
-      expect(page.all("li")[2]).to have_text("Project #3")
-      expect(page.all("li")[3]).to have_text("Project #7")
-      expect(page).not_to have_text("Project #1")
-    end
-  end
 end
