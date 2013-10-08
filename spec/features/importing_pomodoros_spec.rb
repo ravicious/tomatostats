@@ -16,7 +16,6 @@ feature "Importing Pomodoros" do
 
       import_pomodoros(file)
       expect(page).to have_text("2 pomodoros imported.")
-      expect(page).to have_text("15 pomodoros in overall")
       FullCalendar.go_to_date 1379504450
       expect(page).to have_css(".fc-event-time", count: 5)
     end
