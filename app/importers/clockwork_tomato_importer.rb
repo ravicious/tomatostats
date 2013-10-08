@@ -28,4 +28,14 @@ class ClockworkTomatoImporter < Importer
     end
   end
 
+  def validate
+    validate_file_size
+  end
+
+  def validate_file_size
+    if input.size > 512.kilobytes
+      errors.push "File size is too big (should be less than 512 kilobytes)"
+    end
+  end
+
 end
