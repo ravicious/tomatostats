@@ -2,11 +2,6 @@ require 'csv'
 
 class ClockworkTomatoImporter < Importer
 
-  def self.input(new_input)
-    new_input = new_input.to_path if new_input.respond_to?(:to_path)
-    @input = new_input.to_str
-  end
-
   private
 
   def custom_import
@@ -30,6 +25,16 @@ class ClockworkTomatoImporter < Importer
       end
     rescue TypeError, ArgumentError, CSV::MalformedCSVError
       nil
+    end
+  end
+
+  def validate
+    validate_file_size
+  end
+
+  def validate_file_size
+    if input.size > 512.kilobytes
+      errors.push "File size is too big (should be less than 512 kilobytes)"
     end
   end
 

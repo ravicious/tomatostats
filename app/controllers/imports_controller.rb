@@ -6,15 +6,20 @@ class ImportsController < ApplicationController
   end
 
   def create
-    @importer.import
+    if @importer.valid?
+      @importer.import
 
-    if @importer.imported_pomodoros.size > 0
-      flash[:success] = "#{TextHelper.pluralize(@importer.imported_pomodoros.size, "pomodoro")} imported."
+      if @importer.imported_pomodoros.size > 0
+        flash[:success] = "#{TextHelper.pluralize(@importer.imported_pomodoros.size, "pomodoro")} imported."
+      else
+        flash[:notice] = "Zero new pomodoros imported."
+      end
+
+      redirect_to root_path
     else
-      flash[:notice] = "Zero new pomodoros imported."
+      flash[:error] = @importer.errors.join("\n")
+      render :new
     end
-
-    redirect_to root_path
   end
 
   def example_file
