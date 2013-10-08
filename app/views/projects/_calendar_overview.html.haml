@@ -1,0 +1,10 @@
+.col-md-3
+  .panel.panel-default
+    .panel-heading Calendar overview
+    .panel-body
+      .tiny-calendar{data: { date: month.date + "-01" } }
+        .events
+          - month.weeks.each do |week|
+            .event
+              .start= week.days.first.date
+              .end= week.days.last.date
