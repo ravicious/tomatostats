@@ -11,4 +11,8 @@ class Project < ActiveRecord::Base
   def self.sorted_by_name
     order("name ASC")
   end
+
+  def self.sorted_by_activity
+    reorder('updated_at DESC').limit(5)
+  end
 end

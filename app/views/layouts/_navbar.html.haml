@@ -16,7 +16,7 @@
             Projects
             %b.caret
           %ul.dropdown-menu.projects
-            - current_user.projects.reorder('updated_at DESC').limit(5).each do |project|
+            - current_user.projects.sorted_by_activity.each do |project|
               %li= link_to project, project
             %li.divider
             %li= link_to "All projects", projects_path
